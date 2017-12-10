@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+    <ImageView
+        android:id="@+id/img_pick"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/txtv_color_rgb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/label_rgb"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/txtv_color_hex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/label_hex"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/view_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>

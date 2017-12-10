@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Smart Light</string>
+    <string name="pick_color">Pick Color</string>
+    <string name="camera_dialog">Camera</string>
+    <string name="galery_dialog">Galery</string>
+    <string name="title_dialog">You want to pick color from ... ?</string>
+    <string name="label_rgb">rbg code</string>
+    <string name="label_hex">hex code</string>
+</resources>
