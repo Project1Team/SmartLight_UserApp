@@ -1,5 +1,6 @@
 package com.uit.thonglee.smartlight_userapp;
 
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -7,33 +8,66 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
 /**
  * Created by thonglee on 04/12/2017.
  */
 
 public class Pick_Color_Activity extends AppCompatActivity implements View.OnTouchListener{
 
-    TextView textView_hexcolor;
-    TextView textView_rgbcolor;
-    View view_colorpick;
     ImageView imageView_img;
     Uri uri = null;
+    SeekBar seekBar_wheel;
+    String red = "255";
+    String green = "255";
+    String blue = "255";
+    String brightness;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_color);
+
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+        Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
+        this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
+
         inital_view();
+
+        seekBar_wheel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                brightness = exchange(i);
+                MainActivity.client.send(red + green + blue + "000" + brightness);
+        }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         if (savedInstanceState == null) {
             Intent intent = getIntent();
             if (intent == null) {
@@ -114,23 +148,28 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             int blueValue = Color.blue(pixel);
             int greenValue = Color.green(pixel);
 
-            textView_rgbcolor.setText("R" + redValue + ",G" + greenValue + ",B" + blueValue);
-//            textView_hexcolor.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+            red = exchange(redValue);
+            green = exchange(greenValue);
+            blue = exchange(blueValue);
+
+            MainActivity.client.send(red + green + blue + "000255");
 
             String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
-
-            textView_hexcolor.setText(hexColor);
-            view_colorpick.setBackgroundColor(Color.parseColor(hexColor));
         }
         System.gc();
         return false;
     }
-
+    public String exchange(int value){
+        if(value >= 0 && value < 10)
+            return "00" + String.valueOf(value);
+        else if (value >= 10 && value < 100)
+            return "0" + String.valueOf(value);
+        else
+            return String.valueOf(value);
+    }
     public void inital_view(){
-        textView_hexcolor = (TextView) findViewById(R.id.txtv_color_hex);
-        textView_rgbcolor = (TextView) findViewById(R.id.txtv_color_rgb);
-        view_colorpick = (View) findViewById(R.id.view_color);
         imageView_img = (ImageView) findViewById(R.id.img_pick);
+        seekBar_wheel = (SeekBar) findViewById(R.id.seek_bar_pick_color);
         imageView_img.setOnTouchListener(this);
     }
 }

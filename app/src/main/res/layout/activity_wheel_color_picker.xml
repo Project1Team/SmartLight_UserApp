@@ -5,10 +5,11 @@
     android:orientation="vertical"
     android:layout_margin="10dp">
     <ImageView
-        android:id="@+id/img_pick"
+        android:id="@+id/img_wheel_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"/>
+        android:layout_weight="0.2"
+        android:src="@mipmap/wheel_color_picker"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +18,7 @@
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/seek_bar_pick_color"
+            android:id="@+id/seek_bar_wheel_color"
             android:max="255"
             android:min="0"
             android:progress="255"/>
