@@ -1,4 +1,4 @@
-package com.uit.thonglee.smartlight_userapp;
+package com.uit.thonglee.smartlight_userapp.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -12,6 +12,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.Button;
+
+import com.uit.thonglee.smartlight_userapp.R;
 
 //import static com.button.library.R.attr.isSelected;
 //import static com.button.library.R.attr.normalStrokeColor;

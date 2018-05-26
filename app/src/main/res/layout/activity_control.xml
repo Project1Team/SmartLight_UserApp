@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.uit.thonglee.smartlight_userapp.activities.MainActivity">
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        app:titleTextColor="#ffffff"
+        app:subtitleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <com.uit.thonglee.smartlight_userapp.view.CustomButton
+            android:id="@+id/btn_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:roundRadius="100dp"
+            android:layout_margin="5dp"
+            style="@style/button_red" />
+        <com.uit.thonglee.smartlight_userapp.view.CustomButton
+            android:id="@+id/btn_blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            style="@style/button_blue"
+            app:roundRadius="100dp" />
+        <com.uit.thonglee.smartlight_userapp.view.CustomButton
+            android:id="@+id/btn_green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:roundRadius="100dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            style="@style/button_green"/>
+    </LinearLayout>
+
+    <com.uit.thonglee.smartlight_userapp.view.CustomButton
+        android:id="@+id/btn_wheel_color"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wheel_color_picker"
+        style="@style/custom_button_font_setting_style"
+        app:roundRadius="@dimen/radius_45"
+        />
+
+    <com.uit.thonglee.smartlight_userapp.view.CustomButton
+        android:id="@+id/btn_pick_color"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_color"
+        style="@style/custom_button_font_setting_style"
+        app:roundRadius="@dimen/radius_45"
+        />
+
+</LinearLayout>

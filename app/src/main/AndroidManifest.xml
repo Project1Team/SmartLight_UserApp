@@ -13,17 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
+
+        </activity>
+        <activity android:name=".activities.ControlActivity">
+        </activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Pick_Color_Activity"
+        <activity android:name=".activities.Pick_Color_Activity"
             android:label="@string/pick_color">
         </activity>
-        <activity android:name=".Wheel_color_picker_Activity"
+        <activity android:name=".activities.Wheel_color_picker_Activity"
             android:label="@string/wheel_color_picker"></activity>
     </application>
 

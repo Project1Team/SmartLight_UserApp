@@ -1,21 +1,6 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-
-        <!--<item name="android:divider">@color/dividerColor</item>-->
-
-    </style>
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-    <!--<item name="colorAccent">@color/colorAccent</item>-->
-    <!--<item name="windowActionBar">false</item>-->
-    <!--<item name="windowNoTitle">true</item>-->
-    <!--</style>-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Custom" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>
         <item name="windowActionBarOverlay">true</item>

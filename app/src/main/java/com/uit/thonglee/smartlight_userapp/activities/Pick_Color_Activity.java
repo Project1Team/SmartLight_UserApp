@@ -1,4 +1,4 @@
-package com.uit.thonglee.smartlight_userapp;
+package com.uit.thonglee.smartlight_userapp.activities;
 
 import android.app.WallpaperManager;
 import android.content.Intent;
@@ -20,8 +20,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toolbar;
+
+import com.uit.thonglee.smartlight_userapp.utils.BlurBuilder;
+import com.uit.thonglee.smartlight_userapp.R;
+
+import java.io.IOException;
 
 /**
  * Created by thonglee on 04/12/2017.
@@ -29,13 +32,13 @@ import android.widget.Toolbar;
 
 public class Pick_Color_Activity extends AppCompatActivity implements View.OnTouchListener{
 
-    ImageView imageView_img;
-    Uri uri = null;
-    SeekBar seekBar_wheel;
-    String red = "255";
-    String green = "255";
-    String blue = "255";
-    String brightness;
+    public ImageView imageView_img;
+    public Uri uri = null;
+    public SeekBar seekBar_wheel;
+    public String red = "255";
+    public String green = "255";
+    public String blue = "255";
+    public String brightness;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -55,7 +58,13 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 brightness = exchange(i);
-                MainActivity.client.send(red + green + blue + "000" + brightness);
+                try{
+                    LoginActivity.client.send("changeColor/" + MainActivity.device.getMacAddr() + "/" + red + green + blue + "000" + brightness);
+                }
+
+                catch(Exception e){
+
+                }
         }
 
             @Override
@@ -73,10 +82,10 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             if (intent == null) {
                 uri = null;
             } else {
-                uri = intent.getParcelableExtra(MainActivity.IMAGE_KEY);
+                uri = intent.getParcelableExtra(ControlActivity.IMAGE_KEY);
             }
         } else {
-            uri = savedInstanceState.getParcelable(MainActivity.IMAGE_KEY);
+            uri = savedInstanceState.getParcelable(ControlActivity.IMAGE_KEY);
         }
         String uriString = getRealPathFromURI(uri);
         imageView_img.setImageBitmap(decodeSampledBitmapFromResource(uriString, 100, 100));
@@ -152,7 +161,7 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             green = exchange(greenValue);
             blue = exchange(blueValue);
 
-            MainActivity.client.send(red + green + blue + "000255");
+            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000255");
 
             String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
         }

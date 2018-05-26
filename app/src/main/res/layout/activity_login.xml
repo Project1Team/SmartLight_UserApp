@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/connect_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        app:titleTextColor="#ffffff"
+        app:subtitleTextColor="#ffffff"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#50ffffff"
+        android:padding="@dimen/activity_vertical_margin">
+        <EditText
+            android:hint="@string/hint_edit1"
+            android:id="@+id/edtxt_wss"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textStyle="italic"
+            android:hint="@string/hint_edit2"
+            android:id="@+id/edtxt_wsp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.uit.thonglee.smartlight_userapp.view.CustomButton
+            android:id="@+id/btn_connect"
+            android:text="@string/text_button_connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/custom_button_font_setting_style"
+            app:roundRadius="@dimen/radius_45" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/loginview"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:background="#50ffffff"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="LOGIN"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_username"
+            android:hint="@string/username_editText"/>
+
+        <EditText
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_password"
+            android:hint="@string/password_editText"
+            android:inputType="textPassword"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/chb_rem"
+                android:text="@string/remmember_check"/>
+
+            <com.uit.thonglee.smartlight_userapp.view.CustomButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/btn_login"
+                android:text="@string/login_btn"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                style="@style/custom_button_font_setting_style"
+                app:roundRadius="@dimen/radius_45"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

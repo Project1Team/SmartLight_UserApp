@@ -1,4 +1,4 @@
-package com.uit.thonglee.smartlight_userapp;
+package com.uit.thonglee.smartlight_userapp.activities;
 
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
@@ -16,7 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Toast;
+
+import com.uit.thonglee.smartlight_userapp.utils.BlurBuilder;
+import com.uit.thonglee.smartlight_userapp.R;
 
 /**
  * Created by thonglee on 29/12/2017.
@@ -51,7 +53,7 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 Log.d("seekbar",String.valueOf(i));
                 brightness = exchange(i);
-                MainActivity.client.send(red + green + blue + "000" + brightness);            }
+                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000" + brightness);            }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -89,7 +91,7 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
             green = exchange(greenValue);
             blue = exchange(blueValue);
 
-            MainActivity.client.send(red + green + blue + "000255");
+            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000255");
             String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
         }
         System.gc();

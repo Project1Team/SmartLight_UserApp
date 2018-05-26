@@ -12,6 +12,21 @@
     <string name="text_button_connect">Connect</string>
     <string name="hint_messages">Messages</string>
     <string name="text_button_disconnect">Disconnect</string>
-    <string name="default_ip">192.168.43.219</string>
+
+    <string name="toolbar_status_connected">connected</string>
+    <string name="toolbar_status_disconnect">Disconnected</string>
+    <string name="toolbar_status_Error">Error</string>s
+
+    <!--ip address & port default-->
+    <string name="default_ip">192.168.137.93</string>
     <string name="default_port">8887</string>
+
+    <!--login view-->
+    <string name="username_editText">username</string>
+    <string name="password_editText">password</string>
+    <string name="remmember_check">remmerber</string>
+
+    <string name="login_btn">login</string>
+    <string name="logout_btn">logout</string>
+
 </resources>

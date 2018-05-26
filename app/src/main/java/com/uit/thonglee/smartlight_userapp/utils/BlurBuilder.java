@@ -1,4 +1,4 @@
-package com.uit.thonglee.smartlight_userapp;
+package com.uit.thonglee.smartlight_userapp.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
