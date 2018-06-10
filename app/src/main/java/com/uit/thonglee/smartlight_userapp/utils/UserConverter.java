@@ -45,6 +45,11 @@ public class UserConverter {
                 device.setMacAddr((String) ((DBObject) object_device).get("macAddr"));
                 //set color for device object
                 device.setColor((String) ((DBObject) object_device).get("color"));
+                //set status of light (0: off, 1: on)
+                if (((DBObject) object_device).get("status").equals("on"))
+                    device.setStatus(1);
+                else
+                    device.setStatus(0);
                 //add device to device list
                 devices.add(device);
             }

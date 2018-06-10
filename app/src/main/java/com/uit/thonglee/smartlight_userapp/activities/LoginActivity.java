@@ -184,6 +184,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             break;
 
+                        case "messageRes":
+                            connectView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(LoginActivity.this, response[1], Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            break;
+
                         // get color for UI
                         case "getColor":
                             break;

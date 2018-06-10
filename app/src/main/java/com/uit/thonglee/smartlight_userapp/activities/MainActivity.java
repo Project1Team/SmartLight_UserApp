@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Room;
+import com.uit.thonglee.smartlight_userapp.view.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +178,28 @@ public class MainActivity extends AppCompatActivity{
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.textView_nameDevice.setText(devices.get(position).getName());
             holder.textView_macAddr.setText(devices.get(position).getMacAddr());
+            if (devices.get(position).getStatus()==1)
+                holder.toggleButton_status.setToggleOn();
+            else
+                holder.toggleButton_status.setToggleOff();
+
+            holder.toggleButton_status.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+                @Override
+                public void onToggle(boolean on) {
+                    if(on) {
+                        try {
+                            holder.linearLayout_item.setEnabled(true);
+                            LoginActivity.client.send("turnOn/" + devices.get(position).getMacAddr());
+                        } catch (Exception e) {}
+                    }
+                    else {
+                        try {
+                            holder.linearLayout_item.setEnabled(false);
+                            LoginActivity.client.send("turnOff/" + devices.get(position).getMacAddr());
+                        } catch (Exception e) {}
+                    }
+                }
+            });
             holder.linearLayout_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -193,16 +216,19 @@ public class MainActivity extends AppCompatActivity{
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-
+            public LinearLayout linearLayout_item_bg;
             public LinearLayout linearLayout_item;
             public TextView textView_nameDevice;
             public TextView textView_macAddr;
+            public ToggleButton toggleButton_status;
 
             public ViewHolder(final View itemView) {
                 super(itemView);
+                linearLayout_item_bg = itemView.findViewById(R.id.item_device_bg);
                 linearLayout_item = itemView.findViewById(R.id.item_device);
                 textView_nameDevice = itemView.findViewById(R.id.txtv_name_device);
                 textView_macAddr = itemView.findViewById(R.id.txtv_macAddr);
+                toggleButton_status = itemView.findViewById(R.id.togbtn_status);
             }
         }
     }
