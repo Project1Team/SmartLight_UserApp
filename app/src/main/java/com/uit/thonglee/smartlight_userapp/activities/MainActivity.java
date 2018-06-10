@@ -1,17 +1,9 @@
 
 package com.uit.thonglee.smartlight_userapp.activities;
 
-import android.app.WallpaperManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,14 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.models.Device;
-import com.uit.thonglee.smartlight_userapp.models.Home;
-import com.uit.thonglee.smartlight_userapp.utils.BlurBuilder;
+import com.uit.thonglee.smartlight_userapp.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +29,9 @@ import devlight.io.library.ntb.NavigationTabBar;
 public class MainActivity extends AppCompatActivity{
     public static Device device;
     public Toolbar toolbar;
+
     public TextView textView_name;
+    public Button button_logout;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return LoginActivity.user.getHome().size()+1;
+                return LoginActivity.user.getRooms().size()+1;
             }
 
             @Override
@@ -91,7 +84,16 @@ public class MainActivity extends AppCompatActivity{
                 else {
                     view = LayoutInflater.from(getBaseContext()).inflate(R.layout.profile, null, false);
                     textView_name = view.findViewById(R.id.txtv_name);
+                    button_logout = view.findViewById(R.id.btn_logout);
                     textView_name.setText(LoginActivity.user.getName());
+                    button_logout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            LoginActivity.client.send("logout/"+LoginActivity.user.getId().toString());
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 container.addView(view);
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity{
                         .build()
         );
         int i = 1;
-        for(Home home : LoginActivity.user.getHome()){
+        for(Room home : LoginActivity.user.getRooms()){
             models.add(
                     new NavigationTabBar.Model.Builder(
                             getResources().getDrawable(R.drawable.ic_action_room),
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity{
 
         public RecycleAdapter(int index) {
             this.index = index;
-            devices = LoginActivity.user.getHome().get(index).getDevices();
+            devices = LoginActivity.user.getRooms().get(index).getDevices();
         }
 
         @Override

@@ -3,7 +3,7 @@ package com.uit.thonglee.smartlight_userapp.utils;
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
 import com.uit.thonglee.smartlight_userapp.models.Device;
-import com.uit.thonglee.smartlight_userapp.models.Home;
+import com.uit.thonglee.smartlight_userapp.models.Room;
 import com.uit.thonglee.smartlight_userapp.models.User;
 
 import org.bson.types.ObjectId;
@@ -16,7 +16,7 @@ public class UserConverter {
         // initial user object
         User user = new User();
         // create list homes object ro add user
-        List<Home> homes = new ArrayList<Home>();
+        List<Room> rooms = new ArrayList<Room>();
 
         // set _id for user object
         user.setId((ObjectId) dbObject.get("_id"));
@@ -26,12 +26,12 @@ public class UserConverter {
         user.setPassword((String) dbObject.get("password"));
 
         // use DBList of home to query DBObject of home
-        BasicDBList basicDBList_home = (BasicDBList) dbObject.get("home");
+        BasicDBList basicDBList_room = (BasicDBList) dbObject.get("room");
 
         // get DBObject of home from DBList of home
-        for(Object object_home : basicDBList_home){
+        for(Object object_room : basicDBList_room){
             // get and use DBList of deive to query DBObject of device from DBObject of home
-            BasicDBList basicDBList_device = (BasicDBList) ((DBObject) object_home).get("device");
+            BasicDBList basicDBList_device = (BasicDBList) ((DBObject) object_room).get("device");
             // Create list device object to add homes
             List<Device> devices = new ArrayList<Device>();
             // get DBObject of device from DBList of device
@@ -49,18 +49,18 @@ public class UserConverter {
                 devices.add(device);
             }
             // create home object to add list home
-            Home home = new Home();
+            Room room = new Room();
             // set name for home object
-            home.setName((String) ((DBObject) object_home).get("name"));
+            room.setName((String) ((DBObject) object_room).get("name"));
             // set list device for home object
-            home.setDevices(devices);
+            room.setDevices(devices);
 
             // add home object to list homes
-            homes.add(home);
+            rooms.add(room);
         }
 
         // set list home for user object
-        user.setHome(homes);
+        user.setRooms(rooms);
         return user;
     }
 }
