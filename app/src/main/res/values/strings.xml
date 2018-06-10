@@ -18,7 +18,7 @@
     <string name="toolbar_status_Error">Error</string>s
 
     <!--ip address & port default-->
-    <string name="default_ip">192.168.137.93</string>
+    <string name="default_ip">10.254.7.38</string>
     <string name="default_port">8887</string>
 
     <!--login view-->

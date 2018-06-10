@@ -28,7 +28,7 @@
             android:textSize="22sp"
             android:textStyle="bold" />
         <com.uit.thonglee.smartlight_userapp.view.CustomButton
-            android:id="@+id/btn_connect"
+            android:id="@+id/btn_logout"
             android:text="@string/logout_btn"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_gravity="center"
