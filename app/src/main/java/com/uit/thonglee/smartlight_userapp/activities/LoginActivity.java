@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -64,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         InitialView();
     }
 
@@ -114,9 +117,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loginView.setVisibility(View.INVISIBLE);
 
+        // for get IPv4 of wifi
+        // just for easy while testing
+        WifiManager wifiMg = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInf = wifiMg.getConnectionInfo();
+        int ipAddress = wifiInf.getIpAddress();
+        String ipText = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
+
         // set Text default fo ip, port (edit text)
         editText_wsp.setText(R.string.default_port);
-        editText_wss.setText(R.string.default_ip);
+        editText_wss.setText(ipText);
 
         //set Click listener view
         button_login.setOnClickListener(this);
@@ -161,7 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 connectView.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(LoginActivity.this, "account have been used", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Account is already logged in", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -169,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 connectView.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(LoginActivity.this, "account wrong", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
