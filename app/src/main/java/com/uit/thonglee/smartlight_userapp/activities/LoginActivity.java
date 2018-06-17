@@ -184,6 +184,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             break;
 
+                        case "updateColor":
+                            UserConverter.updateColor(response[1], response[2]);
+                            break;
+
+                        case "updateBrightness":
+                            UserConverter.updateBrightness(response[1], response[2]);
+                            break;
+
+                        case "updateStatus":
+                            UserConverter.updateStatus(response[1], response[2]);
+                            break;
+
                         case "messageRes":
                             connectView.post(new Runnable() {
                                 @Override

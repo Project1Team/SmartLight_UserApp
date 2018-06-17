@@ -109,20 +109,20 @@ public void onClick(View view) {
         startActivity(intent);
         break;
         case R.id.btn_red:
-                try{
-                    LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"255000000255255");
+                try {
+                    LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"255000000");
                 }
                 catch (Exception e){}
         break;
         case R.id.btn_blue:
             try{
-                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"000000255255255");
+                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"000000255");
             }
             catch(Exception e){}
         break;
         case R.id.btn_green:
             try{
-                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"000255000255255");
+                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+"000255000");
             }
             catch (Exception e){}
         break;

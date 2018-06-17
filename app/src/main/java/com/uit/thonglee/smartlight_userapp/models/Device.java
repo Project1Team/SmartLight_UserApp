@@ -4,19 +4,30 @@ public class Device {
     public String name;
     public String macAddr;
     public String color;
+    public String brightness;
     public int status;
 
-    public Device(String name, String macAddr, String color, int status) {
+    public Device(String name, String macAddr, String color, String brightness, int status) {
         this.name = name;
         this.macAddr = macAddr;
         this.color = color;
+        this.brightness = brightness;
         this.status = status;
     }
     public Device(){
         this.name = "";
         this.macAddr = "";
         this.color = "";
+        this.brightness = "";
         this.status = 0;
+    }
+
+    public String getBrightness() {
+        return brightness;
+    }
+
+    public void setBrightness(String brightness) {
+        this.brightness = brightness;
     }
 
     public int getStatus() {

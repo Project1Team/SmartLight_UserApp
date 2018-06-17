@@ -25,14 +25,23 @@ import com.uit.thonglee.smartlight_userapp.R;
  */
 
 public class Wheel_color_picker_Activity extends AppCompatActivity implements View.OnTouchListener{
+
     ImageView imageView_wheel_color;
     SeekBar seekBar_wheel;
 
-    String red = "255";
-    String green = "255";
-    String blue = "255";
-    String brightness;
+    public String red;
+    public String green;
+    public String blue;
+    public String color;
+    public String brightness;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        color = MainActivity.device.getColor();
+        brightness = MainActivity.device.getBrightness();
+        seekBar_wheel.setProgress(Integer.parseInt(MainActivity.device.getBrightness()));
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,15 +54,16 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
         Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
         this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
 
+        color = MainActivity.device.getColor();
         imageView_wheel_color = (ImageView) findViewById(R.id.img_wheel_color);
         seekBar_wheel = (SeekBar) findViewById(R.id.seek_bar_wheel_color);
-
+        seekBar_wheel.setProgress(Integer.parseInt(MainActivity.device.getBrightness()));
         seekBar_wheel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 Log.d("seekbar",String.valueOf(i));
                 brightness = exchange(i);
-                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000" + brightness);            }
+                LoginActivity.client.send("changeBrightness/"+MainActivity.device.getMacAddr()+"/" + brightness);            }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -91,7 +101,9 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
             green = exchange(greenValue);
             blue = exchange(blueValue);
 
-            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000255");
+            color = red + green + blue;
+
+            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue);
             String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
         }
         System.gc();

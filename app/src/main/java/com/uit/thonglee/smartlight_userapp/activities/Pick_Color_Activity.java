@@ -52,6 +52,7 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
         Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
         this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
 
+        brightness = MainActivity.device.getBrightness();
         inital_view();
 
         seekBar_wheel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -59,7 +60,7 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 brightness = exchange(i);
                 try{
-                    LoginActivity.client.send("changeColor/" + MainActivity.device.getMacAddr() + "/" + red + green + blue + "000" + brightness);
+                    LoginActivity.client.send("changeBrightness/" + MainActivity.device.getMacAddr() + "/" + brightness);
                 }
 
                 catch(Exception e){
@@ -161,7 +162,7 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
             green = exchange(greenValue);
             blue = exchange(blueValue);
 
-            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue + "000255");
+            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue );
 
             String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
         }
@@ -179,6 +180,7 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
     public void inital_view(){
         imageView_img = (ImageView) findViewById(R.id.img_pick);
         seekBar_wheel = (SeekBar) findViewById(R.id.seek_bar_pick_color);
+        seekBar_wheel.setProgress(Integer.parseInt(brightness));
         imageView_img.setOnTouchListener(this);
     }
 }

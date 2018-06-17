@@ -2,6 +2,7 @@ package com.uit.thonglee.smartlight_userapp.utils;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
+import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Room;
 import com.uit.thonglee.smartlight_userapp.models.User;
@@ -45,6 +46,7 @@ public class UserConverter {
                 device.setMacAddr((String) ((DBObject) object_device).get("macAddr"));
                 //set color for device object
                 device.setColor((String) ((DBObject) object_device).get("color"));
+                device.setBrightness((String) ((DBObject) object_device).get("brightness"));
                 //set status of light (0: off, 1: on)
                 if (((DBObject) object_device).get("status").equals("on"))
                     device.setStatus(1);
@@ -67,5 +69,41 @@ public class UserConverter {
         // set list home for user object
         user.setRooms(rooms);
         return user;
+    }
+    public static boolean updateColor(String macAddr, String color){
+        for(Room room : LoginActivity.user.getRooms()){
+            for(Device device : room.getDevices()){
+                if(device.getMacAddr().equals(macAddr)){
+                    device.setColor(color);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean updateBrightness(String macAddr, String brightness){
+        for(Room room : LoginActivity.user.getRooms()){
+            for(Device device : room.getDevices()){
+                if(device.getMacAddr().equals(macAddr)){
+                    device.setColor(brightness);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean updateStatus(String macAddr, String status){
+        for(Room room : LoginActivity.user.getRooms()){
+            for(Device device : room.getDevices()){
+                if(device.getMacAddr().equals(macAddr)){
+                    if (status.equals("on"))
+                        device.setStatus(1);
+                    else
+                        device.setStatus(0);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
