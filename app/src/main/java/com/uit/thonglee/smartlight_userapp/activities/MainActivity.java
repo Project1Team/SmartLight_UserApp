@@ -1,15 +1,19 @@
 
 package com.uit.thonglee.smartlight_userapp.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,7 @@ import android.widget.TextView;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Room;
+import com.uit.thonglee.smartlight_userapp.utils.Utils;
 import com.uit.thonglee.smartlight_userapp.view.ToggleButton;
 
 import java.util.ArrayList;
@@ -35,10 +40,16 @@ public class MainActivity extends AppCompatActivity{
     public Button button_logout;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initUI();
+
+    }
+
+    @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initUI();
     }
 
     private void initUI() {
@@ -90,9 +101,14 @@ public class MainActivity extends AppCompatActivity{
                     button_logout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            LoginActivity.client.send("logout/"+LoginActivity.user.getId().toString());
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivity(intent);
+                            try{
+                                LoginActivity.client.send("logout/"+LoginActivity.user.getId().toString());
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                            catch (Exception e){
+
+                            }
                         }
                     });
                 }
@@ -166,6 +182,7 @@ public class MainActivity extends AppCompatActivity{
         public RecycleAdapter(int index) {
             this.index = index;
             devices = LoginActivity.user.getRooms().get(index).getDevices();
+            Log.d("IninialRecycle","--------------------------------------");
         }
 
         @Override
@@ -174,10 +191,15 @@ public class MainActivity extends AppCompatActivity{
             return new ViewHolder(view);
         }
 
+        @SuppressLint("Range")
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
+            String color = devices.get(position).getColor();
             holder.textView_nameDevice.setText(devices.get(position).getName());
             holder.textView_macAddr.setText(devices.get(position).getMacAddr());
+            Log.d("SetColor", color);
+            holder.linearLayout_item.setBackgroundColor(Color.rgb(Utils.getRed(color), Utils.getGreen(color), Utils.getBlue(color)));
             if (devices.get(position).getStatus()==1)
                 holder.toggleButton_status.setToggleOn();
             else

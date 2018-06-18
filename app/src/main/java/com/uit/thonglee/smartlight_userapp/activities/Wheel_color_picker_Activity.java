@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toolbar;
 
 import com.uit.thonglee.smartlight_userapp.utils.BlurBuilder;
 import com.uit.thonglee.smartlight_userapp.R;
@@ -28,6 +29,7 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
 
     ImageView imageView_wheel_color;
     SeekBar seekBar_wheel;
+    android.support.v7.widget.Toolbar toolbar;
 
     public String red;
     public String green;
@@ -40,7 +42,7 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
         super.onResume();
         color = MainActivity.device.getColor();
         brightness = MainActivity.device.getBrightness();
-        seekBar_wheel.setProgress(Integer.parseInt(MainActivity.device.getBrightness()));
+        seekBar_wheel.setProgress(Integer.parseInt(brightness));
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -48,11 +50,13 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wheel_color_picker);
 
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
-        Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
-        this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
+        toolbar = findViewById(R.id.toolbar_wheel);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        if(LoginActivity.STATUS==LoginActivity.CONECTED)
+            toolbar.setSubtitle("Connected");
+        else
+            toolbar.setSubtitle("Error");
 
         color = MainActivity.device.getColor();
         imageView_wheel_color = (ImageView) findViewById(R.id.img_wheel_color);
@@ -63,7 +67,11 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 Log.d("seekbar",String.valueOf(i));
                 brightness = exchange(i);
-                LoginActivity.client.send("changeBrightness/"+MainActivity.device.getMacAddr()+"/" + brightness);            }
+                try {
+                    LoginActivity.client.send("changeBrightness/"+MainActivity.device.getMacAddr()+"/" + brightness);
+                }
+                catch (Exception e){}
+            }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -102,9 +110,10 @@ public class Wheel_color_picker_Activity extends AppCompatActivity implements Vi
             blue = exchange(blueValue);
 
             color = red + green + blue;
-
-            LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue);
-            String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
+            try{
+                LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue);
+            }
+            catch (Exception e){}
         }
         System.gc();
         return false;

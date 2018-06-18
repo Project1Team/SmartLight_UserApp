@@ -46,12 +46,6 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_color);
 
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
-        Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
-        this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
-
         brightness = MainActivity.device.getBrightness();
         inital_view();
 
@@ -164,7 +158,6 @@ public class Pick_Color_Activity extends AppCompatActivity implements View.OnTou
 
             LoginActivity.client.send("changeColor/"+MainActivity.device.getMacAddr()+"/"+red + green + blue );
 
-            String hexColor = String.format("#%06X", (0xFFFFFF & pixel));
         }
         System.gc();
         return false;

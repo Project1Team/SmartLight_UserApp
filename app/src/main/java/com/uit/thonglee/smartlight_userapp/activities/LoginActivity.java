@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static WebSocketClient client;
     public static User user;
-    public  static String[] response;
+    public static String[] response;
 
     LinearLayout loginView;
     LinearLayout connectView;
@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         InitialView();
     }
@@ -95,12 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void InitialView(){
-
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
-        Bitmap blur_bitmap = BlurBuilder.blur(this, bm);
-        this.getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), blur_bitmap));
 
         loginView = findViewById(R.id.loginview);
         connectView = findViewById(R.id.connect_view);
@@ -196,14 +189,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         case "updateColor":
                             UserConverter.updateColor(response[1], response[2]);
+                            Log.d("Mess", "UpdateColor");
+
                             break;
 
                         case "updateBrightness":
                             UserConverter.updateBrightness(response[1], response[2]);
+                            Log.d("Mess", "UpdateBrightness");
                             break;
 
                         case "updateStatus":
                             UserConverter.updateStatus(response[1], response[2]);
+                            Log.d("Mess", "Updatestatus");
                             break;
 
                         case "messageRes":

@@ -85,7 +85,7 @@ public class UserConverter {
         for(Room room : LoginActivity.user.getRooms()){
             for(Device device : room.getDevices()){
                 if(device.getMacAddr().equals(macAddr)){
-                    device.setColor(brightness);
+                    device.setBrightness(brightness);
                     return true;
                 }
             }
