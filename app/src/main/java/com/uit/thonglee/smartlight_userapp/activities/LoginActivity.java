@@ -1,10 +1,6 @@
 package com.uit.thonglee.smartlight_userapp.activities;
 
-import android.app.WallpaperManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -19,24 +15,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.models.User;
-import com.uit.thonglee.smartlight_userapp.utils.BlurBuilder;
 import com.uit.thonglee.smartlight_userapp.utils.UserConverter;
 import com.uit.thonglee.smartlight_userapp.view.CustomButton;
 
-import org.java_websocket.WebSocket;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -52,9 +45,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     LinearLayout loginView;
     LinearLayout connectView;
     Toolbar toolbar;
+    TextView toolbarSubTitle;
     EditText editText_wss;
     EditText editText_wsp;
-    CustomButton button_connect;
+    //CustomButton button_connect;
+    Button button_connect;
     EditText editText_username;
     EditText editText_password;
     CheckBox checkBox_remmember;
@@ -98,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginView = findViewById(R.id.loginview);
         connectView = findViewById(R.id.connect_view);
         toolbar = findViewById(R.id.toolbar_login);
+        toolbarSubTitle = findViewById(R.id.toolbar_subtitle);
         editText_wsp = findViewById(R.id.edtxt_wsp);
         editText_wss = findViewById(R.id.edtxt_wss);
         button_connect = findViewById(R.id.btn_connect);
@@ -106,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         checkBox_remmember = findViewById(R.id.chb_rem);
         button_login = findViewById(R.id.btn_login);
 
-        toolbar.setSubtitle("None");
+        //toolbarSubTitle.setText("None");
 
         loginView.setVisibility(View.INVISIBLE);
 
@@ -126,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_connect.setOnClickListener(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
     public void connectServer(){
         if (STATUS == DISCONECTED){
@@ -138,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
-                            toolbar.setSubtitle(R.string.toolbar_status_connected);
+                            toolbarSubTitle.setText(R.string.toolbar_status_connected);
                             button_connect.setText(R.string.text_button_disconnect);
                             loginView.setVisibility(View.VISIBLE);
                         }
@@ -229,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
-                            toolbar.setSubtitle(R.string.toolbar_status_disconnect);
+                            toolbarSubTitle.setText(R.string.toolbar_status_disconnect);
                             button_connect.setText(R.string.text_button_connect);
                             loginView.setVisibility(View.INVISIBLE);
                         }
@@ -242,7 +238,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
-                            toolbar.setSubtitle(R.string.toolbar_status_Error);
+                            toolbarSubTitle.setText(R.string.toolbar_status_Error);
                             loginView.setVisibility(View.INVISIBLE);
 
                         }

@@ -1,108 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/connect_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#88000000"
-        app:titleTextColor="#ffffff"
-        app:subtitleTextColor="#ffffff"/>
+        android:layout_height="150dp"
+        android:background="#ffffff"
+        app:titleTextColor="#000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Smart Home"
+                android:textColor="@android:color/black"
+                style="@style/Toolbar.TitleText"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/toolbar_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_status"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
-        android:background="#50ffffff"
         android:padding="@dimen/activity_vertical_margin">
+
         <EditText
-            android:hint="@string/hint_edit1"
             android:id="@+id/edtxt_wss"
-            android:textStyle="italic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:textStyle="italic"
-            android:hint="@string/hint_edit2"
-            android:id="@+id/edtxt_wsp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <com.uit.thonglee.smartlight_userapp.view.CustomButton
-            android:id="@+id/btn_connect"
-            android:text="@string/text_button_connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/custom_button_font_setting_style"
-            app:roundRadius="@dimen/radius_45" />
+            android:background="@drawable/custom_border"
+            android:hint="@string/hint_edit1"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/edtxt_wsp"
+            android:layout_width="match_parent"
+            android:background="@drawable/custom_border"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/hint_edit2"
+            android:textStyle="normal" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_connect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:background="@drawable/button_border"
+            android:text="@string/text_button_connect"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@null"/>
+
+        <!--<com.uit.thonglee.smartlight_userapp.view.CustomButton-->
+            <!--android:id="@+id/btn_connect"-->
+            <!--style="@style/custom_button_font_setting_style"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/text_button_connect"-->
+            <!--app:roundRadius="10dp" />-->
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/loginview"
-        android:padding="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:background="#50ffffff"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="LOGIN"
+            android:text="Login"
             android:textSize="20dp"
-            android:textStyle="bold"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_username"
-            android:hint="@string/username_editText"/>
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
 
         <EditText
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_border"
+            android:hint="@string/username_editText" />
+
+        <EditText
             android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_border"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="@string/password_editText"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <CheckBox
+                android:id="@+id/chb_rem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/chb_rem"
-                android:text="@string/remmember_check"/>
+                android:layout_centerVertical="true"
+                android:text="@string/remmember_check" />
 
-            <com.uit.thonglee.smartlight_userapp.view.CustomButton
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/btn_login"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_border"
+                android:padding="5dp"
                 android:text="@string/login_btn"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                style="@style/custom_button_font_setting_style"
-                app:roundRadius="@dimen/radius_45"/>
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:stateListAnimator="@null"/>
 
+            <!--<com.uit.thonglee.smartlight_userapp.view.CustomButton-->
+            <!--android:id="@+id/btn_login"-->
+            <!--style="@style/custom_button_font_setting_style"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:paddingLeft="50dp"-->
+            <!--android:paddingRight="50dp"-->
+            <!--android:text="@string/login_btn"-->
+            <!--app:roundRadius="@dimen/radius_45" />-->
         </RelativeLayout>
     </LinearLayout>
-
-
 </LinearLayout>
