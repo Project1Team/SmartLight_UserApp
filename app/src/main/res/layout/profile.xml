@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="100dp"
         android:padding="@dimen/activity_vertical_margin">
         <ImageView
             android:id="@+id/imv_user"
@@ -16,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:background="@drawable/ic_action_name"
+            android:background="@drawable/ic_user_profile"
             tools:ignore="MissingPrefix" />
         <TextView
             android:id="@+id/txtv_name"
@@ -27,16 +28,30 @@
             android:gravity="center"
             android:textSize="22sp"
             android:textStyle="bold" />
-        <com.uit.thonglee.smartlight_userapp.view.CustomButton
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_logout"
-            android:text="@string/logout_btn"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_gravity="center"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:normalSolidColor="@color/color_898989"
-            app:roundRadius="@dimen/radius_45" />
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_border"
+            android:padding="5dp"
+            android:text="@string/logout_btn"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@null"/>
+
+        <!--<com.uit.thonglee.smartlight_userapp.view.CustomButton-->
+            <!--android:id="@+id/btn_logout"-->
+            <!--android:text="@string/logout_btn"-->
+            <!--android:layout_marginTop="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:normalSolidColor="@color/color_898989"-->
+            <!--app:roundRadius="@dimen/radius_45" />-->
     </LinearLayout>
 
 
-</FrameLayout>
+</LinearLayout>

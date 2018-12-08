@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Light</string>
+    <string name="app_name">Smart Home</string>
     <string name="pick_color">Pick Color from Image</string>
     <string name="wheel_color_picker">Wheel Color Picker</string>
     <string name="camera_dialog">Camera</string>
@@ -16,16 +16,16 @@
 
     <string name="toolbar_status_connected">Connected</string>
     <string name="toolbar_status_disconnect">Disconnected</string>
-    <string name="toolbar_status_Error">Error</string>s
+    <string name="toolbar_status_error">Error</string>s
 
     <!--ip address & port default-->
-    <string name="default_ip">10.254.7.38</string>
+    <string name="default_ip">192.168.27.6</string>
     <string name="default_port">8887</string>
 
     <!--login view-->
     <string name="username_editText">Username</string>
     <string name="password_editText">Password</string>
-    <string name="remmember_check">Remmerber</string>
+    <string name="remember_check">Remmerber</string>
 
     <string name="login_btn">Login</string>
     <string name="logout_btn">Logout</string>

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="Smart Home"
                 android:textColor="@android:color/black"
-                style="@style/Toolbar.TitleText"
+                style="@style/Toolbar.TitleText.Login"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/toolbar_subtitle"
@@ -66,7 +66,7 @@
             android:id="@+id/btn_connect"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:padding="12dp"
             android:background="@drawable/button_border"
             android:text="@string/text_button_connect"
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_border"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:hint="@string/password_editText"
             android:inputType="textPassword" />
 
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="@string/remmember_check" />
+                android:text="@string/remember_check" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login"

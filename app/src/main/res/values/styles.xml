@@ -78,8 +78,13 @@
         <item name="android:textColor">@drawable/selector_text_color</item>
     </style>
 
-    <style name="Toolbar.TitleText" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="Toolbar.TitleText.Login" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">50sp</item>
+        <item name="android:fontFamily">@font/billabong</item>
+    </style>
+
+    <style name="Toolbar.TitleText.Main" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">32sp</item>
         <item name="android:fontFamily">@font/billabong</item>
     </style>
 </resources>

@@ -105,8 +105,8 @@ public void onClick(View view) {
         showDialog();
         break;
         case R.id.btn_wheel_color:
-        Intent intent = new Intent(ControlActivity.this, Wheel_color_picker_Activity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(ControlActivity.this, Wheel_color_picker_Activity.class);
+//        startActivity(intent);
         break;
         case R.id.btn_red:
                 try {

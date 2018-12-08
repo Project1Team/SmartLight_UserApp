@@ -27,9 +27,6 @@
         <activity
             android:name=".activities.Pick_Color_Activity"
             android:label="@string/pick_color"></activity>
-        <activity
-            android:name=".activities.Wheel_color_picker_Activity"
-            android:label="@string/wheel_color_picker" />
     </application>
 
 </manifest>

@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String TAG = "Tag";
     public static int STATUS = 0;
-    public static final int CONECTED = 1;
-    public static final int DISCONECTED = 0;
+    public static final int CONNECTED = 1;
+    public static final int DISCONNECTED = 0;
 
     public static WebSocketClient client;
     public static User user;
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button button_connect;
     EditText editText_username;
     EditText editText_password;
-    CheckBox checkBox_remmember;
+    CheckBox checkBox_CONNECTED;
     Button button_login;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 connectServer();
                 break;
             case R.id.btn_login:
-                if(STATUS == CONECTED){
+                if(STATUS == CONNECTED){
                     try{
                         client.send("login/" + editText_username.getText().toString() +"@"+ editText_password.getText().toString());
                     }catch (Exception e){
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_connect = findViewById(R.id.btn_connect);
         editText_username = findViewById(R.id.edt_username);
         editText_password = findViewById(R.id.edt_password);
-        checkBox_remmember = findViewById(R.id.chb_rem);
+        checkBox_CONNECTED = findViewById(R.id.chb_rem);
         button_login = findViewById(R.id.btn_login);
 
         //toolbarSubTitle.setText("None");
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // set Text default fo ip, port (edit text)
         editText_wsp.setText(R.string.default_port);
-        editText_wss.setText(ipText);
+        editText_wss.setText(R.string.default_ip);
 
         //set Click listener view
         button_login.setOnClickListener(this);
@@ -125,12 +125,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
     public void connectServer(){
-        if (STATUS == DISCONECTED){
+        if (STATUS == DISCONNECTED){
             client = new WebSocketClient(URI.create("http://" + editText_wss.getText() + ":" + editText_wsp.getText())) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d("TAG", "Connected");
-                    STATUS = CONECTED;
+                    STATUS = CONNECTED;
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -221,7 +221,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
                     Log.d(TAG, "Disconnected");
-                    STATUS = DISCONECTED;
+                    STATUS = DISCONNECTED;
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -238,7 +238,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     connectView.post(new Runnable() {
                         @Override
                         public void run() {
-                            toolbarSubTitle.setText(R.string.toolbar_status_Error);
+                            toolbarSubTitle.setText(R.string.toolbar_status_error);
                             loginView.setVisibility(View.INVISIBLE);
 
                         }

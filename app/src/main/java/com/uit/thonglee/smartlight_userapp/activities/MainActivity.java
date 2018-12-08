@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        if(LoginActivity.STATUS==LoginActivity.CONECTED)
+        if(LoginActivity.STATUS==LoginActivity.CONNECTED)
             toolbar.setSubtitle("Connected");
         else
             toolbar.setSubtitle("Error");
