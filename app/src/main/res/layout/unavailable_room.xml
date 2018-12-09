@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stateListAnimator="@null"
         android:orientation="vertical"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:padding="@dimen/activity_vertical_margin">
         <ImageView
             android:layout_width="120dp"
@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:background="@drawable/ic_eighth"
+            android:background="@drawable/minion"
             tools:ignore="MissingPrefix" />
         <TextView
             android:layout_width="wrap_content"
@@ -25,7 +25,11 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="This room is not available."
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/samsungsans"
+            android:text="This house is not available."
+            android:textColor="@android:color/black"
+            android:textStyle="normal"
             android:textSize="22sp"/>
     </LinearLayout>
 </LinearLayout>

@@ -104,15 +104,7 @@ public class MainActivity extends AppCompatActivity{
                 } else
                 {
                     view = LayoutInflater.from(
-                            getBaseContext()).inflate(R.layout.items_device_list, null, false);
-
-                    final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(
-                                    getBaseContext(), LinearLayoutManager.VERTICAL, false
-                            )
-                    );
-                    recyclerView.setAdapter(new RecycleAdapter(position-1));
+                            getBaseContext()).inflate(R.layout.home_control, null, false);
                 }
 
                 container.addView(view);

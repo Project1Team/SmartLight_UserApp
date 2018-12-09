@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         app:title="Smart Home"
         app:subtitle="Connected"
         app:titleTextColor="@android:color/black"
@@ -27,7 +27,7 @@
     <devlight.io.library.ntb.NavigationTabBar
         android:id="@+id/ntb_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         app:ntb_inactive_color="@android:color/black"
         app:ntb_badge_gravity="top"
         app:ntb_badge_position="right"

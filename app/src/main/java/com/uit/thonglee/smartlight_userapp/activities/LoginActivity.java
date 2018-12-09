@@ -114,8 +114,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String ipText = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
 
         // set Text default fo ip, port (edit text)
-        editText_wsp.setText(R.string.default_port);
-        editText_wss.setText(R.string.default_ip);
+        //editText_wsp.setText(R.string.default_port);
+        //editText_wss.setText(R.string.default_ip);
+        editText_wsp.setText("8888");
+        editText_wss.setText("192.168.0.107");
 
         //set Click listener view
         button_login.setOnClickListener(this);
