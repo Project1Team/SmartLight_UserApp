@@ -80,20 +80,10 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public Object instantiateItem(final ViewGroup container, final int position) {
                 final View view;
-                if(position != 0){
-                    view = LayoutInflater.from(
-                            getBaseContext()).inflate(R.layout.items_device_list, null, false);
-
-                    final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(
-                                    getBaseContext(), LinearLayoutManager.VERTICAL, false
-                            )
-                    );
-                    recyclerView.setAdapter(new RecycleAdapter(position-1));
-
+                if (position != 0 && position != 1){
+                    view = LayoutInflater.from(getBaseContext()).inflate(R.layout.unavailable_room, null, false);
                 }
-                else {
+                else if (position != 1) {
                     view = LayoutInflater.from(getBaseContext()).inflate(R.layout.profile, null, false);
                     textView_name = view.findViewById(R.id.txtv_name);
                     button_logout = view.findViewById(R.id.btn_logout);
@@ -111,6 +101,18 @@ public class MainActivity extends AppCompatActivity{
                             }
                         }
                     });
+                } else
+                {
+                    view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.items_device_list, null, false);
+
+                    final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(
+                                    getBaseContext(), LinearLayoutManager.VERTICAL, false
+                            )
+                    );
+                    recyclerView.setAdapter(new RecycleAdapter(position-1));
                 }
 
                 container.addView(view);
