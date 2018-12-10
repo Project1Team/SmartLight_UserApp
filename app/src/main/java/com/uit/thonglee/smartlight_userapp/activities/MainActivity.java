@@ -12,8 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.uit.thonglee.smartlight_userapp.R;
-import com.uit.thonglee.smartlight_userapp.fragment.Fragment1;
-import com.uit.thonglee.smartlight_userapp.fragment.Fragment2;
+import com.uit.thonglee.smartlight_userapp.fragment.Profile;
+import com.uit.thonglee.smartlight_userapp.fragment.HomeController;
 import com.uit.thonglee.smartlight_userapp.fragment.Fragment3;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private ViewPager viewPager;
     public Toolbar toolbar;
 
-    private Fragment1 fragment1 = new Fragment1();
-    private Fragment2 fragment2 = new Fragment2();
+    private Profile profile = new Profile();
+    private HomeController homeController = new HomeController();
     private Fragment3 fragment3 = new Fragment3();
 
     @Override
@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        return fragment1;
+                        return profile;
                     case 1:
-                        return fragment2;
+                        return homeController;
                     case 2:
                         return fragment3;
                 }

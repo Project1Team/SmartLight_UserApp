@@ -14,7 +14,7 @@ import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 
 
-public class Fragment1 extends Fragment {
+public class Profile extends Fragment {
     public TextView textView_name;
     public Button button_logout;
 

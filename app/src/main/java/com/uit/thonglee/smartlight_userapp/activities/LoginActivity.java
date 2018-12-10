@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button button_connect;
     EditText editText_username;
     EditText editText_password;
-    CheckBox checkBox_CONNECTED;
+    CheckBox checkBox_remember;
     Button button_login;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_connect = findViewById(R.id.btn_connect);
         editText_username = findViewById(R.id.edt_username);
         editText_password = findViewById(R.id.edt_password);
-        checkBox_CONNECTED = findViewById(R.id.chb_rem);
+        checkBox_remember = findViewById(R.id.chb_rem);
         button_login = findViewById(R.id.btn_login);
 
         //toolbarSubTitle.setText("None");

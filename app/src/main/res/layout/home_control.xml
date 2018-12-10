@@ -24,7 +24,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/icon_temperature"/>
             <TextView
-                android:text="Current temperature (°C): "
+                android:text="Current temperature: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -33,11 +33,18 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/samsungsans" />
             <TextView
-                android:hint="37"
                 android:text="37"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="#1ba0e2"
+                android:textSize="22sp"
+                android:fontFamily="@font/samsungsans"
+                android:textStyle="bold"/>
+            <TextView
+                android:text="°C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#1ba0e2"
                 android:textSize="22sp"
                 android:fontFamily="@font/samsungsans"
                 android:textStyle="bold"/>
@@ -169,6 +176,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -188,6 +196,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -212,6 +221,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -230,9 +240,11 @@
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"/>
+
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -255,6 +267,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -274,6 +287,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -298,6 +312,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -317,6 +332,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"/>
                 <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
