@@ -27,7 +27,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/samsungsans"
-            android:text="This house is not available."
+            android:text="This home is not available."
             android:textColor="@android:color/black"
             android:textStyle="normal"
             android:textSize="22sp"/>

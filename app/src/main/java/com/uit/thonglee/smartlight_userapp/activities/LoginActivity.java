@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //editText_wsp.setText(R.string.default_port);
         //editText_wss.setText(R.string.default_ip);
         editText_wsp.setText("8888");
-        editText_wss.setText("192.168.0.107");
+        editText_wss.setText("192.168.137.31");
 
         //set Click listener view
         button_login.setOnClickListener(this);

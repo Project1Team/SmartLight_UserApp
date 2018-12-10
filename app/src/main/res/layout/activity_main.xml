@@ -2,9 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="#ffffff"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
@@ -19,23 +19,19 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_horizontal_ntb"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <devlight.io.library.ntb.NavigationTabBar
-        android:id="@+id/ntb_horizontal"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        app:ntb_inactive_color="@android:color/black"
-        app:ntb_badge_gravity="top"
-        app:ntb_badge_position="right"
-        app:ntb_badged="true"
-        app:ntb_scaled="true"
-        app:ntb_tinted="true"
-        app:ntb_title_mode="all"
-        app:ntb_titled="true"
-        app:ntb_swiped="true"
-        app:ntb_bg_color="#e6e6e6"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/selector_bot_nav_color"
+        app:itemTextColor="@color/selector_bot_nav_color"
+        app:menu="@menu/navigation"/>
+
 </LinearLayout>

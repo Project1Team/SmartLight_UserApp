@@ -30,4 +30,7 @@
     <string name="login_btn">Login</string>
     <string name="logout_btn">Logout</string>
 
+    <string name="title_home_1">Home 1</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_home_2">Home 2</string>
 </resources>
