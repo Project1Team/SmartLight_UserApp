@@ -36,23 +36,14 @@ public class HomeController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_control, container, false);
-        com.suke.widget.SwitchButton switchButton_1 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_1);
-        com.suke.widget.SwitchButton switchButton_2 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_2);
-        com.suke.widget.SwitchButton switchButton_3 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_3);
-        com.suke.widget.SwitchButton switchButton_4 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_4);
-        com.suke.widget.SwitchButton switchButton_5 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_5);
-        com.suke.widget.SwitchButton switchButton_6 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_6);
-        com.suke.widget.SwitchButton switchButton_7 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_7);
-        com.suke.widget.SwitchButton switchButton_8 = (com.suke.widget.SwitchButton)
-                view.findViewById(R.id.switch_button_8);
-
+        SwitchButton switchButton_1 = view.findViewById(R.id.switch_button_1);
+        SwitchButton switchButton_2 = view.findViewById(R.id.switch_button_2);
+        SwitchButton switchButton_3 = view.findViewById(R.id.switch_button_3);
+        SwitchButton switchButton_4 = view.findViewById(R.id.switch_button_4);
+        SwitchButton switchButton_5 = view.findViewById(R.id.switch_button_5);
+        SwitchButton switchButton_6 = view.findViewById(R.id.switch_button_6);
+        SwitchButton switchButton_7 = view.findViewById(R.id.switch_button_7);
+        SwitchButton switchButton_8 = view.findViewById(R.id.switch_button_8);
 
         switchButton_1.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
@@ -60,7 +51,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_1);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_1);
                     }
                     catch (Exception e) {
 
@@ -68,7 +59,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_1);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_1);
                     }
                     catch (Exception e) {
 
@@ -83,7 +74,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_2);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_2);
                     }
                     catch (Exception e) {
 
@@ -91,7 +82,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_2);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_2);
                     }
                     catch (Exception e) {
 
@@ -106,7 +97,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_3);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_3);
                     }
                     catch (Exception e) {
 
@@ -114,7 +105,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_3);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_3);
                     }
                     catch (Exception e) {
 
@@ -129,7 +120,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_4);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_4);
                     }
                     catch (Exception e) {
 
@@ -137,7 +128,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_4);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_4);
                     }
                     catch (Exception e) {
 
@@ -152,7 +143,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_5);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_5);
                     }
                     catch (Exception e) {
 
@@ -160,7 +151,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_5);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_5);
                     }
                     catch (Exception e) {
 
@@ -175,7 +166,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_6);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_6);
                     }
                     catch (Exception e) {
 
@@ -183,7 +174,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_6);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_6);
                     }
                     catch (Exception e) {
 
@@ -198,7 +189,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_7);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_7);
                     }
                     catch (Exception e) {
 
@@ -206,7 +197,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_7);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_7);
                     }
                     catch (Exception e) {
 
@@ -221,7 +212,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switchOn/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_8);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_8);
                     }
                     catch (Exception e) {
 
@@ -229,7 +220,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switchOff/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_8);
+                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_8);
                     }
                     catch (Exception e) {
 
