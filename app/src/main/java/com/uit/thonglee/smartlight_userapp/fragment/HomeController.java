@@ -16,27 +16,27 @@ import com.uit.thonglee.smartlight_userapp.utils.UserConverter;
 
 public class HomeController extends Fragment {
 
-    public static final String MSG_OPCODE_SWITCH_OFF_1 = "010";
-    public static final String MSG_OPCODE_SWITCH_OFF_2 = "020";
-    public static final String MSG_OPCODE_SWITCH_OFF_3 = "030";
-    public static final String MSG_OPCODE_SWITCH_OFF_4 = "040";
+    public static final String MSG_OPCODE_SWITCH_OFF_11 = "010";
+    public static final String MSG_OPCODE_SWITCH_OFF_12 = "020";
+    public static final String MSG_OPCODE_SWITCH_OFF_13 = "030";
+    public static final String MSG_OPCODE_SWITCH_OFF_14 = "040";
 
-    public static final String MSG_OPCODE_SWITCH_ON_1 = "011";
-    public static final String MSG_OPCODE_SWITCH_ON_2 = "021";
-    public static final String MSG_OPCODE_SWITCH_ON_3 = "031";
-    public static final String MSG_OPCODE_SWITCH_ON_4 = "041";
+    public static final String MSG_OPCODE_SWITCH_ON_11 = "011";
+    public static final String MSG_OPCODE_SWITCH_ON_12 = "021";
+    public static final String MSG_OPCODE_SWITCH_ON_13 = "031";
+    public static final String MSG_OPCODE_SWITCH_ON_14 = "041";
 
-    public static final String MSG_OPCODE_SWITCH_OFF_5 = "110";
-    public static final String MSG_OPCODE_SWITCH_OFF_6 = "120";
-    public static final String MSG_OPCODE_SWITCH_OFF_7 = "130";
-    public static final String MSG_OPCODE_SWITCH_OFF_8 = "140";
+    public static final String MSG_OPCODE_SWITCH_OFF_21 = "110";
+    public static final String MSG_OPCODE_SWITCH_OFF_22 = "120";
+    public static final String MSG_OPCODE_SWITCH_OFF_23 = "130";
+    public static final String MSG_OPCODE_SWITCH_OFF_24 = "140";
 
-    public static final String MSG_OPCODE_SWITCH_ON_5 = "111";
-    public static final String MSG_OPCODE_SWITCH_ON_6 = "121";
-    public static final String MSG_OPCODE_SWITCH_ON_7 = "131";
-    public static final String MSG_OPCODE_SWITCH_ON_8 = "141";
+    public static final String MSG_OPCODE_SWITCH_ON_21 = "111";
+    public static final String MSG_OPCODE_SWITCH_ON_22 = "121";
+    public static final String MSG_OPCODE_SWITCH_ON_23 = "131";
+    public static final String MSG_OPCODE_SWITCH_ON_24 = "141";
 
-
+    public static String mac_address;
 
     @Nullable
     @Override
@@ -67,29 +67,31 @@ public class HomeController extends Fragment {
         SwitchButton switchButton_23 = view.findViewById(R.id.switch_button_23);
         SwitchButton switchButton_24 = view.findViewById(R.id.switch_button_24);
 
+        mac_address = LoginActivity.user.getHomes().get(0).getMacAddr();
+
         textView_temperature.setText(UserConverter.getTeamperatureValue(LoginActivity.user.getHomes().get(0).getMacAddr()));
-        textView_gas.setText(UserConverter.getGasStatus(LoginActivity.user.getHomes().get(0).getMacAddr()));
+        textView_gas.setText(UserConverter.getGasStatus(mac_address));
         textView_fire.setText(UserConverter.getFireStatus(LoginActivity.user.getHomes().get(0).getMacAddr()));
 
-        textView_switch11.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 0));
-        textView_switch12.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 1));
-        textView_switch13.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 2));
-        textView_switch14.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 3));
+        textView_switch11.setText(UserConverter.getNameSwitch(mac_address, "1", 0));
+        textView_switch12.setText(UserConverter.getNameSwitch(mac_address, "1", 1));
+        textView_switch13.setText(UserConverter.getNameSwitch(mac_address, "1", 2));
+        textView_switch14.setText(UserConverter.getNameSwitch(mac_address, "1", 3));
 
-        textView_switch21.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 0));
-        textView_switch22.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 1));
-        textView_switch23.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 2));
-        textView_switch24.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 3));
+        textView_switch21.setText(UserConverter.getNameSwitch(mac_address, "2", 0));
+        textView_switch22.setText(UserConverter.getNameSwitch(mac_address, "2", 1));
+        textView_switch23.setText(UserConverter.getNameSwitch(mac_address, "2", 2));
+        textView_switch24.setText(UserConverter.getNameSwitch(mac_address, "2", 3));
 
-        switchButton_11.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 0));
-        switchButton_12.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 1));
-        switchButton_13.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 2));
-        switchButton_14.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 3));
+        switchButton_11.setChecked(UserConverter.getStatusSwitch(mac_address, "1", 0));
+        switchButton_12.setChecked(UserConverter.getStatusSwitch(mac_address, "1", 1));
+        switchButton_13.setChecked(UserConverter.getStatusSwitch(mac_address, "1", 2));
+        switchButton_14.setChecked(UserConverter.getStatusSwitch(mac_address, "1", 3));
 
-        switchButton_21.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 0));
-        switchButton_22.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 1));
-        switchButton_23.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 2));
-        switchButton_24.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 3));
+        switchButton_21.setChecked(UserConverter.getStatusSwitch(mac_address, "2", 0));
+        switchButton_22.setChecked(UserConverter.getStatusSwitch(mac_address, "2", 1));
+        switchButton_23.setChecked(UserConverter.getStatusSwitch(mac_address, "2", 2));
+        switchButton_24.setChecked(UserConverter.getStatusSwitch(mac_address, "2", 3));
 
         switchButton_11.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
@@ -97,7 +99,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_1);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_11);
                     }
                     catch (Exception e) {
 
@@ -105,7 +107,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_1);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_11);
                     }
                     catch (Exception e) {
 
@@ -120,7 +122,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_2);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_12);
                     }
                     catch (Exception e) {
 
@@ -128,7 +130,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_2);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_12);
                     }
                     catch (Exception e) {
 
@@ -143,7 +145,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_3);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_13);
                     }
                     catch (Exception e) {
 
@@ -151,7 +153,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_3);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_13);
                     }
                     catch (Exception e) {
 
@@ -166,7 +168,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_4);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_14);
                     }
                     catch (Exception e) {
 
@@ -174,7 +176,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_4);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_14);
                     }
                     catch (Exception e) {
 
@@ -189,7 +191,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_5);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_21);
                     }
                     catch (Exception e) {
 
@@ -197,7 +199,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_5);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_21);
                     }
                     catch (Exception e) {
 
@@ -212,7 +214,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_6);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_22);
                     }
                     catch (Exception e) {
 
@@ -220,7 +222,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_6);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_22);
                     }
                     catch (Exception e) {
 
@@ -235,7 +237,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_7);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_23);
                     }
                     catch (Exception e) {
 
@@ -243,7 +245,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_7);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_23);
                     }
                     catch (Exception e) {
 
@@ -258,7 +260,7 @@ public class HomeController extends Fragment {
                 if (isChecked)
                 {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_ON_8);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_24);
                     }
                     catch (Exception e) {
 
@@ -266,7 +268,7 @@ public class HomeController extends Fragment {
                 }
                 else {
                     try {
-                        LoginActivity.client.send("switch/" + "macAddress/" + MSG_OPCODE_SWITCH_OFF_8);
+                        LoginActivity.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_24);
                     }
                     catch (Exception e) {
 
