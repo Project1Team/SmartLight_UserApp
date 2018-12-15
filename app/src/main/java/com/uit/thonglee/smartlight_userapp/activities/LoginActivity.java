@@ -68,17 +68,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_connect:
-//                DBObject userDBObject = (DBObject) JSON.parse("{ \"_id\" : { \"$oid\" : \"5ace1acc7f6beb0865a16383\"} , \"name\" : \"thao\" , \"password\" : \"111111\" , \"home\" : [ { \"name\" : \"home1\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"11121212323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"6546454535\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home2\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"121232323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"3434354566\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home3\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"25621424\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"12312313\" , \"color\" : \"000000255255255\"}]}]}");
-//                user = new User();
-//                user = UserConverter.toUser(userDBObject);
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
+                //DBObject userDBObject = (DBObject) JSON.parse("{ \"_id\" : { \"$oid\" : \"5ace1acc7f6beb0865a16383\"} , \"name\" : \"thao\" , \"password\" : \"111111\" , \"home\" : [ { \"name\" : \"home1\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"11121212323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"6546454535\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home2\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"121232323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"3434354566\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home3\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"25621424\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"12312313\" , \"color\" : \"000000255255255\"}]}]}");
+                //user = new User();
+                //user = UserConverter.toUser(userDBObject);
+                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                //startActivity(intent);
                 connectServer();
                 break;
             case R.id.btn_login:
                 if(STATUS == CONNECTED){
                     try{
                         client.send("login/" + editText_username.getText().toString() +"@"+ editText_password.getText().toString());
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }catch (Exception e){
                         Log.d(TAG, "Error: " + e.toString());
                     }
