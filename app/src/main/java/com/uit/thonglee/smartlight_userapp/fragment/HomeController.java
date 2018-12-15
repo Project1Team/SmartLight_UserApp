@@ -6,46 +6,92 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
+import com.uit.thonglee.smartlight_userapp.utils.UserConverter;
 
 
 public class HomeController extends Fragment {
-    public static final String MSG_OPCODE_SWITCH_ON_1 = "0301";
-    public static final String MSG_OPCODE_SWITCH_ON_2 = "0302";
-    public static final String MSG_OPCODE_SWITCH_ON_3 = "0303";
-    public static final String MSG_OPCODE_SWITCH_ON_4 = "0304";
-    public static final String MSG_OPCODE_SWITCH_ON_5 = "0305";
-    public static final String MSG_OPCODE_SWITCH_ON_6 = "0306";
-    public static final String MSG_OPCODE_SWITCH_ON_7 = "0307";
-    public static final String MSG_OPCODE_SWITCH_ON_8 = "0308";
 
-    public static final String MSG_OPCODE_SWITCH_OFF_1 = "1311";
-    public static final String MSG_OPCODE_SWITCH_OFF_2 = "1312";
-    public static final String MSG_OPCODE_SWITCH_OFF_3 = "1313";
-    public static final String MSG_OPCODE_SWITCH_OFF_4 = "1314";
-    public static final String MSG_OPCODE_SWITCH_OFF_5 = "1315";
-    public static final String MSG_OPCODE_SWITCH_OFF_6 = "1316";
-    public static final String MSG_OPCODE_SWITCH_OFF_7 = "1317";
-    public static final String MSG_OPCODE_SWITCH_OFF_8 = "1318";
+    public static final String MSG_OPCODE_SWITCH_OFF_1 = "010";
+    public static final String MSG_OPCODE_SWITCH_OFF_2 = "020";
+    public static final String MSG_OPCODE_SWITCH_OFF_3 = "030";
+    public static final String MSG_OPCODE_SWITCH_OFF_4 = "040";
+
+    public static final String MSG_OPCODE_SWITCH_ON_1 = "011";
+    public static final String MSG_OPCODE_SWITCH_ON_2 = "021";
+    public static final String MSG_OPCODE_SWITCH_ON_3 = "031";
+    public static final String MSG_OPCODE_SWITCH_ON_4 = "041";
+
+    public static final String MSG_OPCODE_SWITCH_OFF_5 = "110";
+    public static final String MSG_OPCODE_SWITCH_OFF_6 = "120";
+    public static final String MSG_OPCODE_SWITCH_OFF_7 = "130";
+    public static final String MSG_OPCODE_SWITCH_OFF_8 = "140";
+
+    public static final String MSG_OPCODE_SWITCH_ON_5 = "111";
+    public static final String MSG_OPCODE_SWITCH_ON_6 = "121";
+    public static final String MSG_OPCODE_SWITCH_ON_7 = "131";
+    public static final String MSG_OPCODE_SWITCH_ON_8 = "141";
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_control, container, false);
-        SwitchButton switchButton_1 = view.findViewById(R.id.switch_button_1);
-        SwitchButton switchButton_2 = view.findViewById(R.id.switch_button_2);
-        SwitchButton switchButton_3 = view.findViewById(R.id.switch_button_3);
-        SwitchButton switchButton_4 = view.findViewById(R.id.switch_button_4);
-        SwitchButton switchButton_5 = view.findViewById(R.id.switch_button_5);
-        SwitchButton switchButton_6 = view.findViewById(R.id.switch_button_6);
-        SwitchButton switchButton_7 = view.findViewById(R.id.switch_button_7);
-        SwitchButton switchButton_8 = view.findViewById(R.id.switch_button_8);
 
-        switchButton_1.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        TextView textView_temperature = view.findViewById(R.id.txtv_temperature);
+        TextView textView_gas = view.findViewById(R.id.txtv_gas);
+        TextView textView_fire = view.findViewById(R.id.txtv_fire);
+
+        TextView textView_switch11 = view.findViewById(R.id.txtv_switch11);
+        TextView textView_switch12 = view.findViewById(R.id.txtv_switch12);
+        TextView textView_switch13 = view.findViewById(R.id.txtv_switch13);
+        TextView textView_switch14 = view.findViewById(R.id.txtv_switch14);
+
+        TextView textView_switch21 = view.findViewById(R.id.txtv_switch21);
+        TextView textView_switch22 = view.findViewById(R.id.txtv_switch22);
+        TextView textView_switch23 = view.findViewById(R.id.txtv_switch23);
+        TextView textView_switch24 = view.findViewById(R.id.txtv_switch24);
+
+        SwitchButton switchButton_11 = view.findViewById(R.id.switch_button_11);
+        SwitchButton switchButton_12 = view.findViewById(R.id.switch_button_12);
+        SwitchButton switchButton_13 = view.findViewById(R.id.switch_button_13);
+        SwitchButton switchButton_14 = view.findViewById(R.id.switch_button_14);
+
+        SwitchButton switchButton_21 = view.findViewById(R.id.switch_button_21);
+        SwitchButton switchButton_22 = view.findViewById(R.id.switch_button_22);
+        SwitchButton switchButton_23 = view.findViewById(R.id.switch_button_23);
+        SwitchButton switchButton_24 = view.findViewById(R.id.switch_button_24);
+
+        textView_temperature.setText(UserConverter.getTeamperatureValue(LoginActivity.user.getHomes().get(0).getMacAddr()));
+        textView_gas.setText(UserConverter.getGasStatus(LoginActivity.user.getHomes().get(0).getMacAddr()));
+        textView_fire.setText(UserConverter.getFireStatus(LoginActivity.user.getHomes().get(0).getMacAddr()));
+
+        textView_switch11.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 0));
+        textView_switch12.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 1));
+        textView_switch13.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 2));
+        textView_switch14.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 3));
+
+        textView_switch21.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 0));
+        textView_switch22.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 1));
+        textView_switch23.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 2));
+        textView_switch24.setText(UserConverter.getNameSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 3));
+
+        switchButton_11.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 0));
+        switchButton_12.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 1));
+        switchButton_13.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 2));
+        switchButton_14.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "1", 3));
+
+        switchButton_21.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 0));
+        switchButton_22.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 1));
+        switchButton_23.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 2));
+        switchButton_24.setChecked(UserConverter.getStatusSwitch(LoginActivity.user.getHomes().get(0).getMacAddr(), "2", 3));
+
+        switchButton_11.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -68,7 +114,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_2.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_12.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -91,7 +137,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_3.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_13.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -114,7 +160,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_4.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_14.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -137,7 +183,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_5.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_21.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -160,7 +206,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_6.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_22.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -183,7 +229,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_7.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_23.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)
@@ -206,7 +252,7 @@ public class HomeController extends Fragment {
             }
         });
 
-        switchButton_8.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton_24.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked)

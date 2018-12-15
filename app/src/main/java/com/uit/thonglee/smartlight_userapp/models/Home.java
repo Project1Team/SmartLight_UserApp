@@ -3,8 +3,9 @@ package com.uit.thonglee.smartlight_userapp.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+public class Home {
     public String name;
+    public String macAddr;
     public List<Device> devices;
 
     public String getName() {
@@ -23,13 +24,23 @@ public class Room {
         this.devices = devices;
     }
 
-    public Room(String name, List<Device> devices) {
+    public String getMacAddr() {
+        return macAddr;
+    }
+
+    public void setMacAddr(String macAddr) {
+        this.macAddr = macAddr;
+    }
+
+    public Home(String name, String macAddr, List<Device> devices) {
         this.name = name;
+        this.macAddr = macAddr;
         this.devices = devices;
     }
 
-    public Room() {
+    public Home() {
         this.name = "";
+        this.macAddr = "";
         this.devices = new ArrayList<Device>();
     }
 }

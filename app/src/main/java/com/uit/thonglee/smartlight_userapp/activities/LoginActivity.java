@@ -185,21 +185,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             break;
 
-                        case "updateColor":
-                            UserConverter.updateColor(response[1], response[2]);
-                            Log.d("Mess", "UpdateColor");
-
-                            break;
-
-                        case "updateBrightness":
-                            UserConverter.updateBrightness(response[1], response[2]);
-                            Log.d("Mess", "UpdateBrightness");
-                            break;
-
-                        case "updateStatus":
-                            UserConverter.updateStatus(response[1], response[2]);
-                            Log.d("Mess", "Updatestatus");
-                            break;
+//                        case "updateColor":
+//                            UserConverter.updateColor(response[1], response[2]);
+//                            Log.d("Mess", "UpdateColor");
+//
+//                            break;
+//
+//                        case "updateBrightness":
+//                            UserConverter.updateBrightness(response[1], response[2]);
+//                            Log.d("Mess", "UpdateBrightness");
+//                            break;
+//
+//                        case "updateStatus":
+//                            UserConverter.updateStatus(response[1], response[2]);
+//                            Log.d("Mess", "Updatestatus");
+//                            break;
 
                         case "messageRes":
                             connectView.post(new Runnable() {

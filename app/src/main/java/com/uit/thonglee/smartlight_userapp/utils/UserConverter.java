@@ -4,7 +4,12 @@ import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
-import com.uit.thonglee.smartlight_userapp.models.Room;
+import com.uit.thonglee.smartlight_userapp.models.Fire;
+import com.uit.thonglee.smartlight_userapp.models.Gas;
+import com.uit.thonglee.smartlight_userapp.models.Home;
+import com.uit.thonglee.smartlight_userapp.models.Switch;
+import com.uit.thonglee.smartlight_userapp.models.SwitchBoard;
+import com.uit.thonglee.smartlight_userapp.models.Temperature;
 import com.uit.thonglee.smartlight_userapp.models.User;
 
 import org.bson.types.ObjectId;
@@ -12,12 +17,14 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.Templates;
+
 public class UserConverter {
     public static User toUser(DBObject dbObject){
         // initial user object
         User user = new User();
         // create list homes object ro add user
-        List<Room> rooms = new ArrayList<Room>();
+        List<Home> homes = new ArrayList<Home>();
 
         // set _id for user object
         user.setId((ObjectId) dbObject.get("_id"));
@@ -27,80 +34,175 @@ public class UserConverter {
         user.setPassword((String) dbObject.get("password"));
 
         // use DBList of home to query DBObject of home
-        BasicDBList basicDBList_room = (BasicDBList) dbObject.get("room");
+        BasicDBList basicDBList_home = (BasicDBList) dbObject.get("home");
 
         // get DBObject of home from DBList of home
-        for(Object object_room : basicDBList_room){
+        for(Object object_home : basicDBList_home){
             // get and use DBList of deive to query DBObject of device from DBObject of home
-            BasicDBList basicDBList_device = (BasicDBList) ((DBObject) object_room).get("device");
+            BasicDBList basicDBList_device = (BasicDBList) ((DBObject) object_home).get("device");
             // Create list device object to add homes
             List<Device> devices = new ArrayList<Device>();
             // get DBObject of device from DBList of device
             for(Object object_device: basicDBList_device){
-
-                //Create device object to add list device
-                Device device = new Device();
-                // set name for device object
-                device.setName((String) ((DBObject) object_device).get("name"));
-                //set mac Address for device object
-                device.setMacAddr((String) ((DBObject) object_device).get("macAddr"));
-                //set color for device object
-                device.setColor((String) ((DBObject) object_device).get("color"));
-                device.setBrightness((String) ((DBObject) object_device).get("brightness"));
-                //set status of light (0: off, 1: on)
-                if (((DBObject) object_device).get("status").equals("on"))
-                    device.setStatus(1);
-                else
-                    device.setStatus(0);
-                //add device to device list
-                devices.add(device);
+                switch ((String)((DBObject) object_device).get("type")){
+                    case "temperature":
+                        Temperature temperature = new Temperature((String)((DBObject) object_device).get("name"),
+                                (String)((DBObject) object_device).get("type"),
+                                (String)((DBObject) object_device).get("value"));
+                        devices.add(temperature);
+                        break;
+                    case "gas":
+                        Gas gas = new Gas((String)((DBObject) object_device).get("name"),
+                                (String)((DBObject) object_device).get("type"),
+                                (String)((DBObject) object_device).get("status"));
+                        devices.add(gas);
+                        break;
+                    case "fire":
+                        Fire fire = new Fire((String)((DBObject) object_device).get("name"),
+                                (String)((DBObject) object_device).get("type"),
+                                (String)((DBObject) object_device).get("status"));
+                        devices.add(fire);
+                        break;
+                    case "switch":
+                        BasicDBList basicDBList_switch = (BasicDBList) ((DBObject) object_device).get("switch");
+                        List<Switch> switches = new ArrayList<Switch>();
+                        for(Object object_switch : basicDBList_switch){
+                            boolean turnOn = false;
+                            if(((String)((DBObject) object_switch).get("status")).equals("on"))
+                                turnOn = true;
+                            Switch aSwitch = new Switch((String)((DBObject) object_switch).get("name"), turnOn);
+                            switches.add(aSwitch);
+                        }
+                        SwitchBoard switchBoard = new SwitchBoard((String)((DBObject) object_device).get("name"),
+                                (String)((DBObject) object_device).get("type"),
+                                (String)((DBObject) object_device).get("index"), switches);
+                        devices.add(switchBoard);
+                        break;
+                }
             }
             // create home object to add list home
-            Room room = new Room();
-            // set name for home object
-            room.setName((String) ((DBObject) object_room).get("name"));
-            // set list device for home object
-            room.setDevices(devices);
-
+            Home home = new Home((String)((DBObject) object_home).get("name"),
+                    (String)((DBObject) object_home).get("macAddr"), devices);
             // add home object to list homes
-            rooms.add(room);
+            homes.add(home);
         }
-
         // set list home for user object
-        user.setRooms(rooms);
+        user.setHomes(homes);
         return user;
     }
-    public static boolean updateColor(String macAddr, String color){
-        for(Room room : LoginActivity.user.getRooms()){
-            for(Device device : room.getDevices()){
-                if(device.getMacAddr().equals(macAddr)){
-                    device.setColor(color);
-                    return true;
+//    public static boolean updateColor(String macAddr, String color){
+//        for(Home home : LoginActivity.user.getHomes()){
+//            for(Device device : home.getDevices()){
+//                if(device.getMacAddr().equals(macAddr)){
+//                    device.setColor(color);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//    public static boolean updateBrightness(String macAddr, String brightness){
+//        for(Home home : LoginActivity.user.getHomes()){
+//            for(Device device : home.getDevices()){
+//                if(device.getMacAddr().equals(macAddr)){
+//                    device.setBrightness(brightness);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//    public static boolean updateStatus(String macAddr, String status){
+//        for(Home home : LoginActivity.user.getHomes()){
+//            for(Device device : home.getDevices()){
+//                if(device.getMacAddr().equals(macAddr)){
+//                    if (status.equals("on"))
+//                        device.setStatus(1);
+//                    else
+//                        device.setStatus(0);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
+    public static String getTeamperatureValue(String macAddr){
+        for(Home home : LoginActivity.user.getHomes()){
+            if(home.macAddr.equals(macAddr))
+            {
+                for (Device device : home.getDevices()){
+                    if(device.getType().equals("temperature"))
+                    {
+                        Temperature temperature = (Temperature) device;
+                        return temperature.getValue();
+                    }
                 }
             }
         }
-        return false;
+        return "";
     }
-    public static boolean updateBrightness(String macAddr, String brightness){
-        for(Room room : LoginActivity.user.getRooms()){
-            for(Device device : room.getDevices()){
-                if(device.getMacAddr().equals(macAddr)){
-                    device.setBrightness(brightness);
-                    return true;
+
+    public static String getFireStatus(String macAddr){
+        for(Home home : LoginActivity.user.getHomes()){
+            if(home.macAddr.equals(macAddr))
+            {
+                for (Device device : home.getDevices()){
+                    if(device.getType().equals("fire"))
+                    {
+                        Fire fire = (Fire) device;
+                        return fire.getStatus();
+                    }
                 }
             }
         }
-        return false;
+        return "";
     }
-    public static boolean updateStatus(String macAddr, String status){
-        for(Room room : LoginActivity.user.getRooms()){
-            for(Device device : room.getDevices()){
-                if(device.getMacAddr().equals(macAddr)){
-                    if (status.equals("on"))
-                        device.setStatus(1);
-                    else
-                        device.setStatus(0);
-                    return true;
+
+    public static String getGasStatus(String macAddr){
+        for(Home home : LoginActivity.user.getHomes()){
+            if(home.macAddr.equals(macAddr))
+            {
+                for (Device device : home.getDevices()){
+                    if(device.getType().equals("gas"))
+                    {
+                        Gas gas = (Gas) device;
+                        return gas.getStatus();
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    public static String getNameSwitch(String macAddr, String indexBoard, int indexSwitch){
+        for(Home home : LoginActivity.user.getHomes()){
+            if(home.macAddr.equals(macAddr))
+            {
+                for (Device device : home.getDevices()){
+                    if(device.getType().equals("switch"))
+                    {
+                        SwitchBoard switchBoard = (SwitchBoard) device;
+                        if(switchBoard.getIndex().equals(indexBoard))
+                            return switchBoard.getSwitchs().get(indexSwitch).getName();
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    public static boolean getStatusSwitch(String macAddr, String indexBoard, int indexSwitch){
+        for(Home home : LoginActivity.user.getHomes()){
+            if(home.macAddr.equals(macAddr))
+            {
+                for (Device device : home.getDevices()){
+                    if(device.getType().equals("switch"))
+                    {
+                        SwitchBoard switchBoard = (SwitchBoard) device;
+                        if(switchBoard.getIndex().equals(indexBoard))
+                            return switchBoard.getSwitchs().get(indexSwitch).isStatus();
+                    }
                 }
             }
         }

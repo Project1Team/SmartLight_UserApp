@@ -9,19 +9,19 @@ public class User {
     public ObjectId id;
     public String name;
     public String password;
-    public List<Room> rooms;
+    public List<Home> homes;
 
-    public User(ObjectId id, String name, String password, List<Room> rooms) {
+    public User(ObjectId id, String name, String password, List<Home> homes) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.rooms = rooms;
+        this.homes = homes;
     }
 
     public User() {
         this.name = "";
         this.password = "";
-        this.rooms = new ArrayList<Room>();
+        this.homes = new ArrayList<Home>();
     }
 
     public String getName() {
@@ -40,12 +40,12 @@ public class User {
         this.password = password;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public List<Home> getHomes() {
+        return homes;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setHomes(List<Home> homes) {
+        this.homes = homes;
     }
 
     public ObjectId getId() {
