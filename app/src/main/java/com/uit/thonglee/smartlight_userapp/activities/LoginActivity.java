@@ -79,8 +79,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(STATUS == CONNECTED){
                     try{
                         client.send("login/" + editText_username.getText().toString() +"@"+ editText_password.getText().toString());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
                     }catch (Exception e){
                         Log.d(TAG, "Error: " + e.toString());
                     }
