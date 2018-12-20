@@ -13,6 +13,8 @@
     <color name="color_303f9f">#303F9F</color>
     <color name="color_ff0000">#ff0000</color>
     <color name="color_00ff00">#00ff00</color>
-
+    <color name="ic_launcher_background">#FFFFFF</color>
     <color name="color_464646">#464646</color>
+    <color name="safe_color">#51d367</color>
+    <color name="hot_temp_color">#ffaf1a</color>
 </resources>

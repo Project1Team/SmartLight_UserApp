@@ -1,5 +1,6 @@
 package com.uit.thonglee.smartlight_userapp.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.R;
+import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.utils.UserConverter;
 
@@ -44,6 +45,7 @@ public class HomeController extends Fragment {
         View view = inflater.inflate(R.layout.home_control, container, false);
 
         TextView textView_temperature = view.findViewById(R.id.txtv_temperature);
+        TextView textView_celsius = view.findViewById(R.id.txtv_celsius);
         TextView textView_gas = view.findViewById(R.id.txtv_gas);
         TextView textView_fire = view.findViewById(R.id.txtv_fire);
 
@@ -69,9 +71,31 @@ public class HomeController extends Fragment {
 
         mac_address = LoginActivity.user.getHomes().get(0).getMacAddr();
 
-        textView_temperature.setText(UserConverter.getTeamperatureValue(LoginActivity.user.getHomes().get(0).getMacAddr()));
-        textView_gas.setText(UserConverter.getGasStatus(mac_address));
-        textView_fire.setText(UserConverter.getFireStatus(LoginActivity.user.getHomes().get(0).getMacAddr()));
+        if (Integer.parseInt(UserConverter.getTeamperatureValue(mac_address)) > 30 ) {
+            textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
+            textView_temperature.setTextColor(getResources().getColor(R.color.hot_temp_color));
+            textView_celsius.setTextColor(getResources().getColor(R.color.hot_temp_color));
+        }
+        else {
+            textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
+        }
+        if (UserConverter.getGasStatus(mac_address).equals("SOS")) {
+            textView_gas.setText(UserConverter.getGasStatus(mac_address));
+            textView_gas.setTextColor(Color.RED);
+        }
+        else {
+            textView_gas.setText(UserConverter.getGasStatus(mac_address));
+            textView_gas.setTextColor(getResources().getColor(R.color.safe_color));
+        }
+
+        if (UserConverter.getFireStatus(mac_address).equals("SOS")) {
+            textView_fire.setText(UserConverter.getFireStatus(mac_address));
+            textView_fire.setTextColor(Color.RED);
+        }
+        else {
+            textView_fire.setText(UserConverter.getFireStatus(mac_address));
+            textView_fire.setTextColor(getResources().getColor(R.color.safe_color));
+        }
 
         textView_switch11.setText(UserConverter.getNameSwitch(mac_address, "1", 0));
         textView_switch12.setText(UserConverter.getNameSwitch(mac_address, "1", 1));

@@ -8,7 +8,7 @@
     <string name="label_rgb">rbg code</string>
     <string name="label_hex">hex code</string>
     <string name="default_status">Not connected yet</string>
-    <string name="hint_edit1">Server IP</string>
+    <string name="hint_edit1">Server address</string>
     <string name="hint_edit2">Server Port</string>
     <string name="text_button_connect">Connect</string>
     <string name="hint_messages">Messages</string>

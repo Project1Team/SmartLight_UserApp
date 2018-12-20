@@ -1,4 +1,3 @@
-
 package com.uit.thonglee.smartlight_userapp.activities;
 
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.fragment.Profile;
 import com.uit.thonglee.smartlight_userapp.fragment.HomeController;
@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(this);
+        viewPager.setPageTransformer(true, new DefaultTransformer());
+
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

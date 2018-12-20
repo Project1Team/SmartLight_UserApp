@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 
-
 public class Profile extends Fragment {
     public TextView textView_name;
     public Button button_logout;
@@ -34,7 +33,9 @@ public class Profile extends Fragment {
                     startActivity(intent);
                 }
                 catch (Exception e){
-
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
                 }
             }
         });

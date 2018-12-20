@@ -1,8 +1,6 @@
 package com.uit.thonglee.smartlight_userapp.activities;
 
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +21,6 @@ import com.mongodb.util.JSON;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.models.User;
 import com.uit.thonglee.smartlight_userapp.utils.UserConverter;
-import com.uit.thonglee.smartlight_userapp.view.CustomButton;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -48,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView toolbarSubTitle;
     EditText editText_wss;
     EditText editText_wsp;
-    //CustomButton button_connect;
     Button button_connect;
     EditText editText_username;
     EditText editText_password;
@@ -94,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         connectView = findViewById(R.id.connect_view);
         toolbar = findViewById(R.id.toolbar_login);
         toolbarSubTitle = findViewById(R.id.toolbar_subtitle);
-        editText_wsp = findViewById(R.id.edtxt_wsp);
+        //editText_wsp = findViewById(R.id.edtxt_wsp);
         editText_wss = findViewById(R.id.edtxt_wss);
         button_connect = findViewById(R.id.btn_connect);
         editText_username = findViewById(R.id.edt_username);
@@ -102,22 +98,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         checkBox_remember = findViewById(R.id.chb_rem);
         button_login = findViewById(R.id.btn_login);
 
-        //toolbarSubTitle.setText("None");
-
         loginView.setVisibility(View.INVISIBLE);
 
-        // for get IPv4 of wifi
-        // just for easy while testing
-        WifiManager wifiMg = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        WifiInfo wifiInf = wifiMg.getConnectionInfo();
-        int ipAddress = wifiInf.getIpAddress();
-        String ipText = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
-
-        // set Text default fo ip, port (edit text)
-        //editText_wsp.setText(R.string.default_port);
-        //editText_wss.setText(R.string.default_ip);
-        editText_wsp.setText("8888");
-        editText_wss.setText("192.168.137.31");
+        editText_wss.setText("ubuntu.localhost.run");
+        //editText_wsp.setText("80");
 
         //set Click listener view
         button_login.setOnClickListener(this);
@@ -128,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     public void connectServer(){
         if (STATUS == DISCONNECTED){
-            client = new WebSocketClient(URI.create("http://" + editText_wss.getText() + ":" + editText_wsp.getText())) {
+            client = new WebSocketClient(URI.create("http://" + editText_wss.getText() + ":80")) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d("TAG", "Connected");
