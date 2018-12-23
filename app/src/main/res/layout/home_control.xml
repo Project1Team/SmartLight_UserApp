@@ -83,8 +83,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/samsungsans"
                 android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/btn_resetFire"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/clear_state_border"
+                    android:src="@drawable/ic_reset_state"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -119,8 +131,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/samsungsans"
                 android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/btn_resetGas"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/clear_state_border"
+                    android:src="@drawable/ic_reset_state"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

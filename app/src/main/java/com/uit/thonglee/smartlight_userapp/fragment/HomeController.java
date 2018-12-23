@@ -23,7 +23,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.uit.thonglee.smartlight_userapp.R;
@@ -68,7 +68,7 @@ public class HomeController extends Fragment {
     public TextView textView_celsius;
     public TextView textView_gas;
     public TextView textView_fire;
-    public Button button_resetFire;
+    public ImageButton button_resetFire;
 
     public NotificationManagerCompat notificationManager;
     public NotificationCompat.Builder mBuilder;
@@ -120,7 +120,7 @@ public class HomeController extends Fragment {
         else {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
         }
-        if (UserConverter.getGasStatus(mac_address).equals("GAS DETECTED")) {
+        if (UserConverter.getGasStatus(mac_address).equals("DETECTED!")) {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(Color.RED);
         }
@@ -129,7 +129,7 @@ public class HomeController extends Fragment {
             textView_gas.setTextColor(getResources().getColor(R.color.safe_color));
         }
 
-        if (UserConverter.getFireStatus(mac_address).equals("FIRE DETECTED")) {
+        if (UserConverter.getFireStatus(mac_address).equals("DETECTED!")) {
             textView_fire.setText(UserConverter.getFireStatus(mac_address));
             textView_fire.setTextColor(Color.RED);
             // notification
