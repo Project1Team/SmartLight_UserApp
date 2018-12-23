@@ -1,6 +1,9 @@
 package com.uit.thonglee.smartlight_userapp.activities;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -38,14 +41,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             toolbar.setSubtitle("Connected");
         else
             toolbar.setSubtitle("Error");
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(this);
         viewPager.setPageTransformer(true, new DefaultTransformer());
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        // create notification channel
+        createNotificationChannel();
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -65,6 +68,22 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 return 3;
             }
         });
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "channel 1";
+            String description = "description";
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

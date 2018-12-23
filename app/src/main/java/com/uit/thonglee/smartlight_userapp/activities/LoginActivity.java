@@ -169,22 +169,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             break;
 
-//                        case "updateColor":
-//                            UserConverter.updateColor(response[1], response[2]);
-//                            Log.d("Mess", "UpdateColor");
-//
-//                            break;
-//
-//                        case "updateBrightness":
-//                            UserConverter.updateBrightness(response[1], response[2]);
-//                            Log.d("Mess", "UpdateBrightness");
-//                            break;
-//
-//                        case "updateStatus":
-//                            UserConverter.updateStatus(response[1], response[2]);
-//                            Log.d("Mess", "Updatestatus");
-//                            break;
-
                         case "messageRes":
                             connectView.post(new Runnable() {
                                 @Override
@@ -193,13 +177,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                             });
                             break;
-
-                        // get color for UI
-                        case "getColor":
-                            break;
-
-                        // edit user profile
-                        case "updateUser":
+                        case "update":
+                            DBObject userUpdate = (DBObject) JSON.parse(response[1]);
+                            user = UserConverter.toUser(userUpdate);
+                            Toast.makeText(LoginActivity.this, "update", Toast.LENGTH_SHORT).show();
                             break;
                     }
 
