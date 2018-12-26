@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.uit.thonglee.smartlight_userapp.R;
 import com.suke.widget.SwitchButton;
+import com.uit.thonglee.smartlight_userapp.activities.AlertActivity;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.activities.MainActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
@@ -41,6 +42,8 @@ import java.util.List;
 
 
 public class HomeController extends Fragment {
+
+    public static final String RESET_STATUS = "resetStatus";
 
     public static final String MSG_OPCODE_SWITCH_OFF_11 = "010";
     public static final String MSG_OPCODE_SWITCH_OFF_12 = "020";
@@ -120,7 +123,7 @@ public class HomeController extends Fragment {
         else {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
         }
-        if (UserConverter.getGasStatus(mac_address).equals("DETECTED!")) {
+        if (UserConverter.getGasStatus(mac_address).equals("DETECTED")) {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(Color.RED);
         }
@@ -129,11 +132,11 @@ public class HomeController extends Fragment {
             textView_gas.setTextColor(getResources().getColor(R.color.safe_color));
         }
 
-        if (UserConverter.getFireStatus(mac_address).equals("DETECTED!")) {
+        if (UserConverter.getFireStatus(mac_address).equals("DETECTED")) {
             textView_fire.setText(UserConverter.getFireStatus(mac_address));
             textView_fire.setTextColor(Color.RED);
             // notification
-            notificationManager.notify(1, mBuilder.build());
+            notificationManager.notify(0, mBuilder.build());
             if(mMediaPlayer.isPlaying() == false){
                 mMediaPlayer.start();
             }
@@ -388,19 +391,22 @@ public class HomeController extends Fragment {
                         Fire fire = (Fire) device;
                         if(fire.getStatus() != string_fire){
                             string_fire = fire.getStatus();
-                            if(fire.getStatus().equals("FIRE DETECTED")){
+                            if(fire.getStatus().equals("DETECTED")){
                                 // notification
-                                notificationManager.notify(1, mBuilder.build());
+                                notificationManager.notify(0, mBuilder.build());
                                 vibrator.vibrate(1000);
-                                if(mMediaPlayer.isPlaying() == false){
-                                    mMediaPlayer.start();
-                                }
+                                mMediaPlayer.start();
                                 statusButtonResetFire = String.valueOf(View.VISIBLE);
                             }
                             else{
                                 statusButtonResetFire = String.valueOf(View.INVISIBLE);
                                 if(mMediaPlayer.isPlaying()){
                                     mMediaPlayer.stop();
+                                    try {
+                                        mMediaPlayer.prepare();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
                         }
@@ -427,8 +433,9 @@ public class HomeController extends Fragment {
     }
     private void createNotification(){
         // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this.getContext(), AlertActivity.class);
+        intent.putExtra(RESET_STATUS, "fire");
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this.getContext(), 0, intent, 0);
         // Vibrator
         vibrator = (Vibrator) this.getActivity().getSystemService(this.getContext().VIBRATOR_SERVICE);

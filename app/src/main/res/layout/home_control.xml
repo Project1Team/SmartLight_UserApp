@@ -95,6 +95,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/clear_state_border"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_reset_state"/>
             </RelativeLayout>
         </LinearLayout>
@@ -141,6 +142,7 @@
                     android:id="@+id/btn_resetGas"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:visibility="invisible"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/clear_state_border"
                     android:src="@drawable/ic_reset_state"/>
