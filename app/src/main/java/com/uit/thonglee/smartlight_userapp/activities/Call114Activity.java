@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.uit.thonglee.smartlight_userapp.fragment.HomeController;
+
+import java.io.IOException;
+
 import static com.uit.thonglee.smartlight_userapp.fragment.HomeController.mMediaPlayer;
 
 public class Call114Activity extends AppCompatActivity {
@@ -19,6 +22,11 @@ public class Call114Activity extends AppCompatActivity {
         if(mMediaPlayer.isPlaying())
         {
             mMediaPlayer.stop();
+            try {
+                mMediaPlayer.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         HomeController.notificationManager.cancelAll();
         startActivity(intent);

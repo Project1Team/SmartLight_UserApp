@@ -17,4 +17,5 @@
     <color name="color_464646">#464646</color>
     <color name="safe_color">#51d367</color>
     <color name="hot_temp_color">#ffaf1a</color>
+    <color name ="defaut_temp">#1ba0e2</color>
 </resources>

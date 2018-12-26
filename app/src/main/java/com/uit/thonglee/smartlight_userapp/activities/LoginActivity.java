@@ -86,8 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onPause() {
         unregisterReceiver(networkStateReceiver);
-        STATUS = RECONNECTED;
         super.onPause();
+        STATUS = RECONNECTED;
     }
 
     @Override

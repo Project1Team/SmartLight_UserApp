@@ -69,9 +69,11 @@ public class HomeController extends Fragment {
     public TextView textView_gas;
     public TextView textView_fire;
     public ImageButton button_resetFire;
+    public ImageButton button_resetGas;
 
     public static NotificationManagerCompat notificationManager;
     public NotificationCompat.Builder mBuilder;
+    public NotificationCompat.Builder mBuilder1;
     public static MediaPlayer mMediaPlayer;
     public Vibrator vibrator;
 
@@ -107,6 +109,7 @@ public class HomeController extends Fragment {
         SwitchButton switchButton_24 = view.findViewById(R.id.switch_button_24);
 
         button_resetFire = view.findViewById(R.id.btn_resetFire);
+        button_resetGas = view.findViewById(R.id.btn_resetGas);
 
         mac_address = LoginActivity.user.getHomes().get(0).getMacAddr();
 
@@ -119,10 +122,18 @@ public class HomeController extends Fragment {
         }
         else {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
+            textView_temperature.setTextColor(getResources().getColor(R.color.defaut_temp));
+            textView_celsius.setTextColor(getResources().getColor(R.color.defaut_temp));
         }
         if (UserConverter.getGasStatus(mac_address).equals("DETECTED")) {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(Color.RED);
+            notificationManager.notify(0, mBuilder1.build());
+            if(mMediaPlayer.isPlaying() == false){
+                mMediaPlayer.start();
+            }
+            vibrator.vibrate(1000);
+            button_resetGas.setVisibility(View.VISIBLE);
         }
         else {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
@@ -169,6 +180,12 @@ public class HomeController extends Fragment {
             @Override
             public void onClick(View view) {
                 LoginActivity.client.send("resetFire/" + LoginActivity.user.getHomes().get(0).getMacAddr());
+            }
+        });
+        button_resetGas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginActivity.client.send("resetGas/" + LoginActivity.user.getHomes().get(0).getMacAddr());
             }
         });
         switchButton_11.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
@@ -368,9 +385,13 @@ public class HomeController extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             String string_temp = (String) textView_temperature.getText();
+            String colorTeamperate = String.valueOf(textView_temperature.getCurrentTextColor());
             String string_fire = (String) textView_fire.getText();
             String string_gas = (String) textView_gas.getText();
             String statusButtonResetFire = String.valueOf(button_resetFire.getVisibility());
+            String statusButtonResetGas = String.valueOf(button_resetGas.getVisibility());
+            String colorFire = String.valueOf(textView_fire.getCurrentTextColor());
+            String colorGas = String.valueOf(textView_gas.getCurrentTextColor());
             while(true){
                 try {
                     Thread.sleep(3000);
@@ -381,22 +402,32 @@ public class HomeController extends Fragment {
                 for(Device device : devices){
                     if(device.getType().equals("temperature")){
                         Temperature temperature = (Temperature) device;
-                        if(temperature.getValue() != string_temp)
+                        if(temperature.getValue().equals(string_temp)) {
                             string_temp = temperature.getValue();
+                            if(Integer.parseInt(string_temp) > 30){
+                                colorTeamperate = String.valueOf(getResources().getColor(R.color.hot_temp_color));
+                            }
+                            else{
+                                colorTeamperate = String.valueOf(getResources().getColor(R.color.defaut_temp));
+                            }
+                        }
                     }
                     else if(device.getType().equals("fire")){
                         Fire fire = (Fire) device;
-                        if(fire.getStatus() != string_fire){
+                        if(!fire.getStatus().equals(string_fire)){
                             string_fire = fire.getStatus();
                             if(fire.getStatus().equals("DETECTED")){
+                                statusButtonResetFire = String.valueOf(View.VISIBLE);
+                                colorFire = String.valueOf(Color.RED);
                                 // notification
                                 notificationManager.notify(0, mBuilder.build());
                                 vibrator.vibrate(1000);
-                                mMediaPlayer.start();
-                                statusButtonResetFire = String.valueOf(View.VISIBLE);
+                                if(!mMediaPlayer.isPlaying())
+                                    mMediaPlayer.start();
                             }
                             else{
                                 statusButtonResetFire = String.valueOf(View.INVISIBLE);
+                                colorFire = String.valueOf(getResources().getColor(R.color.safe_color));
                                 if(mMediaPlayer.isPlaying()){
                                     mMediaPlayer.stop();
                                     try {
@@ -410,12 +441,32 @@ public class HomeController extends Fragment {
                     }
                     else if(device.getType().equals("gas")){
                         Gas gas = (Gas) device;
-                        if(gas.getStatus() != string_gas)
+                        if(!gas.getStatus().equals(string_gas))
                             string_gas = gas.getStatus();
+                        if(gas.getStatus().equals("DETECTED")){
+                            statusButtonResetGas = String.valueOf(View.VISIBLE);
+                            colorGas = String.valueOf(Color.RED);
+                            // notification
+                            notificationManager.notify(0, mBuilder1.build());
+                            vibrator.vibrate(1000);
+                            if(!mMediaPlayer.isPlaying())
+                                mMediaPlayer.start();
+                        }
+                        else{
+                            statusButtonResetGas = String.valueOf(View.INVISIBLE);
+                            colorGas = String.valueOf(getResources().getColor(R.color.safe_color));
+                            if(mMediaPlayer.isPlaying()){
+                                mMediaPlayer.stop();
+                                try {
+                                    mMediaPlayer.prepare();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                     }
                 }
-                int i = 10;
-                publishProgress(string_temp, string_fire, statusButtonResetFire, string_gas);
+                publishProgress(string_temp, colorTeamperate, string_fire, statusButtonResetFire, colorFire, string_gas, statusButtonResetGas, colorGas);
             }
         }
 
@@ -423,21 +474,31 @@ public class HomeController extends Fragment {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             textView_temperature.setText(values[0]);
-            textView_fire.setText(values[1]);
-            button_resetFire.setVisibility(Integer.parseInt(values[2]));
-            textView_gas.setText(values[3]);
+            textView_temperature.setTextColor(Integer.parseInt(values[1]));
+            textView_celsius.setTextColor(Integer.parseInt(values[1]));
+
+            textView_fire.setText(values[2]);
+            button_resetFire.setVisibility(Integer.parseInt(values[3]));
+            textView_fire.setTextColor(Integer.parseInt(values[4]));
+
+            textView_gas.setText(values[5]);
+            button_resetGas.setVisibility(Integer.parseInt(values[6]));
+            textView_gas.setTextColor(Integer.parseInt(values[7]));
         }
     }
     private void createNotification(){
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this.getContext(), AlertActivity.class);
+        Intent intent1 = new Intent(this.getContext(), AlertActivity.class);
         intent.putExtra(RESET_STATUS, "fire");
+        intent1.putExtra(RESET_STATUS, "gas");
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         Intent clearAlarmIntent = new Intent(this.getContext(), ClearAlarmActivity.class);
         Intent call114Intent = new Intent(this.getContext(), Call114Activity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this.getContext(), 0, intent, 0);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(this.getContext(), 0, intent1, 0);
         PendingIntent clearAlarmPending = PendingIntent.getActivity(this.getContext(), 0, clearAlarmIntent, 0);
         PendingIntent call114Pending = PendingIntent.getActivity(this.getContext(), 0, call114Intent, 0);
 
@@ -459,11 +520,11 @@ public class HomeController extends Fragment {
         catch (IOException e) {
             e.printStackTrace();
         }
-
+        // create notification for fire
         mBuilder = new NotificationCompat.Builder(this.getContext(), "1")
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setSmallIcon(R.drawable.icon_flame)
-                .setContentTitle("Fire")
+                .setContentTitle("FIRE")
                 .setContentText("Fire detected! Your house is ON FIRE!")
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .addAction(0, "CALL 114", call114Pending)
@@ -471,6 +532,19 @@ public class HomeController extends Fragment {
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
+        // create notification for gas
+        mBuilder1 = new NotificationCompat.Builder(this.getContext(), "1")
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setSmallIcon(R.drawable.icon_gas)
+                .setContentTitle("GAS")
+                .setContentText("Gas detected! Your house is ON GAS!")
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .addAction(0, "CALL 114", call114Pending)
+                .addAction(0, "DISABLE SOUND", clearAlarmPending)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent1)
+                .setAutoCancel(true);
+
         notificationManager = NotificationManagerCompat.from(this.getContext());
     }
 

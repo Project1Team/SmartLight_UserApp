@@ -36,7 +36,7 @@
                 android:id="@+id/txtv_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#1ba0e2"
+                android:textColor="@color/defaut_temp"
                 android:textSize="22sp"
                 android:fontFamily="@font/samsungsans"
                 android:textStyle="bold"/>
@@ -45,7 +45,7 @@
                 android:text="°C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#1ba0e2"
+                android:textColor="@color/defaut_temp"
                 android:textSize="22sp"
                 android:fontFamily="@font/samsungsans"
                 android:textStyle="bold"/>
