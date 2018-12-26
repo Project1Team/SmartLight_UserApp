@@ -435,7 +435,7 @@ public class HomeController extends Fragment {
         // Vibrator
         vibrator = (Vibrator) this.getActivity().getSystemService(this.getContext().VIBRATOR_SERVICE);
         // Alert notification
-        Uri ringTone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Uri ringTone = Uri.parse("android.resource://com.uit.thonglee.smartlight_userapp/" + R.raw.alert_ringing);
         mMediaPlayer = new MediaPlayer();
         try {
             mMediaPlayer.setDataSource(this.getContext(), ringTone);
