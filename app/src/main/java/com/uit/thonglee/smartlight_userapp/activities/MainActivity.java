@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "channel 1";
-            String description = "description";
-            int importance = NotificationManager.IMPORTANCE_MAX;
+            CharSequence name = "Fire situation";
+            String description = "Alert if the house is on fire";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("1", name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance

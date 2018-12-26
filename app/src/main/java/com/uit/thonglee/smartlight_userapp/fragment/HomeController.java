@@ -25,6 +25,8 @@ import android.widget.TextView;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.activities.AlertActivity;
+import com.uit.thonglee.smartlight_userapp.activities.Call114Activity;
+import com.uit.thonglee.smartlight_userapp.activities.ClearAlarmActivity;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Fire;
@@ -68,9 +70,9 @@ public class HomeController extends Fragment {
     public TextView textView_fire;
     public ImageButton button_resetFire;
 
-    public NotificationManagerCompat notificationManager;
+    public static NotificationManagerCompat notificationManager;
     public NotificationCompat.Builder mBuilder;
-    public MediaPlayer mMediaPlayer;
+    public static MediaPlayer mMediaPlayer;
     public Vibrator vibrator;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -431,7 +433,15 @@ public class HomeController extends Fragment {
         Intent intent = new Intent(this.getContext(), AlertActivity.class);
         intent.putExtra(RESET_STATUS, "fire");
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        Intent clearAlarmIntent = new Intent(this.getContext(), ClearAlarmActivity.class);
+        Intent call114Intent = new Intent(this.getContext(), Call114Activity.class);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this.getContext(), 0, intent, 0);
+        PendingIntent clearAlarmPending = PendingIntent.getActivity(this.getContext(), 0, clearAlarmIntent, 0);
+        PendingIntent call114Pending = PendingIntent.getActivity(this.getContext(), 0, call114Intent, 0);
+
+
         // Vibrator
         vibrator = (Vibrator) this.getActivity().getSystemService(this.getContext().VIBRATOR_SERVICE);
         // Alert notification
@@ -454,8 +464,10 @@ public class HomeController extends Fragment {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setSmallIcon(R.drawable.icon_flame)
                 .setContentTitle("Fire")
-                .setContentText("Fire detected !")
+                .setContentText("Fire detected! Your house is ON FIRE!")
                 .setPriority(NotificationCompat.PRIORITY_MAX)
+                .addAction(0, "CALL 114", call114Pending)
+                .addAction(0, "DISABLE SOUND", clearAlarmPending)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
