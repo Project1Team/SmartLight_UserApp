@@ -33,4 +33,6 @@
     <string name="title_home_1">Home 1</string>
     <string name="title_profile">Profile</string>
     <string name="title_home_2">Home 2</string>
+    <string name="alert_status">ALERT</string>
+    <string name="alert_fire">Your house is ON FIRE!</string>
 </resources>

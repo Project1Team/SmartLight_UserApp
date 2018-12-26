@@ -1,6 +1,11 @@
 package com.uit.thonglee.smartlight_userapp.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,8 +37,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String TAG = "Tag";
     public static int STATUS = 0;
+    public static final int RECONNECTED = 2;
     public static final int CONNECTED = 1;
     public static final int DISCONNECTED = 0;
+
 
     public static WebSocketClient client;
     public static User user;
@@ -60,17 +67,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         InitialView();
     }
 
+    private BroadcastReceiver networkStateReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager manager = (ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo ni = manager.getActiveNetworkInfo();
+            connectServer();
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(networkStateReceiver);
+        STATUS = RECONNECTED;
+        super.onPause();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_connect:
-                //DBObject userDBObject = (DBObject) JSON.parse("{ \"_id\" : { \"$oid\" : \"5ace1acc7f6beb0865a16383\"} , \"name\" : \"thao\" , \"password\" : \"111111\" , \"home\" : [ { \"name\" : \"home1\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"11121212323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"6546454535\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home2\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"121232323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"3434354566\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home3\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"25621424\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"12312313\" , \"color\" : \"000000255255255\"}]}]}");
-                //user = new User();
-                //user = UserConverter.toUser(userDBObject);
-                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                //startActivity(intent);
-                connectServer();
-                break;
+//            case R.id.btn_connect:
+//                //DBObject userDBObject = (DBObject) JSON.parse("{ \"_id\" : { \"$oid\" : \"5ace1acc7f6beb0865a16383\"} , \"name\" : \"thao\" , \"password\" : \"111111\" , \"home\" : [ { \"name\" : \"home1\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"11121212323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"6546454535\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home2\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"121232323\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"3434354566\" , \"color\" : \"000000255255255\"}]} , { \"name\" : \"home3\" , \"device\" : [ { \"name\" : \"light1\" , \"macAddr\" : \"25621424\" , \"color\" : \"000000255255255\"} , { \"name\" : \"light2\" , \"macAddr\" : \"12312313\" , \"color\" : \"000000255255255\"}]}]}");
+//                //user = new User();
+//                //user = UserConverter.toUser(userDBObject);
+//                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                //startActivity(intent);
+//                connectServer();
+//                break;
             case R.id.btn_login:
                 if(STATUS == CONNECTED){
                     try{
@@ -78,6 +108,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }catch (Exception e){
                         Log.d(TAG, "Error: " + e.toString());
                     }
+                }
+                else {
+                    Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -91,28 +124,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         toolbar = findViewById(R.id.toolbar_login);
         toolbarSubTitle = findViewById(R.id.toolbar_subtitle);
         //editText_wsp = findViewById(R.id.edtxt_wsp);
-        editText_wss = findViewById(R.id.edtxt_wss);
-        button_connect = findViewById(R.id.btn_connect);
+        //editText_wss = findViewById(R.id.edtxt_wss);
+        //button_connect = findViewById(R.id.btn_connect);
         editText_username = findViewById(R.id.edt_username);
         editText_password = findViewById(R.id.edt_password);
         checkBox_remember = findViewById(R.id.chb_rem);
         button_login = findViewById(R.id.btn_login);
 
-        loginView.setVisibility(View.INVISIBLE);
+        //loginView.setVisibility(View.INVISIBLE);
 
-        editText_wss.setText("ubuntu.localhost.run");
+        //editText_wss.setText("ubuntu.localhost.run");
         //editText_wsp.setText("80");
 
         //set Click listener view
         button_login.setOnClickListener(this);
-        button_connect.setOnClickListener(this);
+        //button_connect.setOnClickListener(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
     public void connectServer(){
         if (STATUS == DISCONNECTED){
-            client = new WebSocketClient(URI.create("http://" + editText_wss.getText() + ":80")) {
+            client = new WebSocketClient(URI.create("http://ubuntu.localhost.run:80")) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d("TAG", "Connected");
@@ -121,8 +154,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             toolbarSubTitle.setText(R.string.toolbar_status_connected);
-                            button_connect.setText(R.string.text_button_disconnect);
-                            loginView.setVisibility(View.VISIBLE);
+                            //button_connect.setText(R.string.text_button_disconnect);
+                            //loginView.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -193,8 +226,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             toolbarSubTitle.setText(R.string.toolbar_status_disconnect);
-                            button_connect.setText(R.string.text_button_connect);
-                            loginView.setVisibility(View.INVISIBLE);
+                            //button_connect.setText(R.string.text_button_connect);
+                            //loginView.setVisibility(View.INVISIBLE);
                         }
                     });
                 }
@@ -206,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             toolbarSubTitle.setText(R.string.toolbar_status_error);
-                            loginView.setVisibility(View.INVISIBLE);
+                            //loginView.setVisibility(View.INVISIBLE);
 
                         }
                     });
@@ -214,9 +247,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             };
             client.connect();
         }
-        else{
-            client.close();
-        }
+        else
+            if (STATUS == RECONNECTED) {
+                client.reconnect();
+                toolbarSubTitle.setText(R.string.toolbar_status_connected);
+            }
+            else {
+                client.close();
+            }
     }
     @Override
     public void onBackPressed() {

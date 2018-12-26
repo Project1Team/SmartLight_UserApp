@@ -30,6 +30,7 @@ public class Profile extends Fragment {
                 try{
                     LoginActivity.client.send("logout/"+LoginActivity.user.getId().toString());
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    LoginActivity.STATUS = LoginActivity.RECONNECTED;
                     startActivity(intent);
                 }
                 catch (Exception e){

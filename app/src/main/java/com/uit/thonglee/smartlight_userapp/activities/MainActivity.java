@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        if(LoginActivity.STATUS==LoginActivity.CONNECTED)
+        if((LoginActivity.STATUS == LoginActivity.CONNECTED) || (LoginActivity.STATUS == LoginActivity.RECONNECTED))
             toolbar.setSubtitle("Connected");
         else
             toolbar.setSubtitle("Error");

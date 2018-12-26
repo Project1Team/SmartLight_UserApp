@@ -87,4 +87,9 @@
         <item name="android:textSize">27sp</item>
         <item name="android:fontFamily">@font/samsungsans</item>
     </style>
+
+    <style name="Toolbar.TitleText.Alert" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">40sp</item>
+        <item name="android:fontFamily">@font/samsungsans</item>
+    </style>
 </resources>

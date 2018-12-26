@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/toolbar_title"
@@ -37,50 +37,49 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_vertical_margin">
-
-        <EditText
-            android:id="@+id/edtxt_wss"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_border"
-            android:hint="@string/hint_edit1"
-            android:textStyle="normal" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:padding="@dimen/activity_vertical_margin">-->
 
         <!--<EditText-->
-            <!--android:id="@+id/edtxt_wsp"-->
+            <!--android:id="@+id/edtxt_wss"-->
             <!--android:layout_width="match_parent"-->
-            <!--android:background="@drawable/custom_border"-->
             <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:hint="@string/hint_edit2"-->
+            <!--android:background="@drawable/custom_border"-->
+            <!--android:hint="@string/hint_edit1"-->
             <!--android:textStyle="normal" />-->
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_connect"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="12dp"
-            android:background="@drawable/button_border"
-            android:text="@string/text_button_connect"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:stateListAnimator="@null"/>
-    </LinearLayout>
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/edtxt_wsp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/custom_border"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="8dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:hint="@string/hint_edit2"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textStyle="normal" />&ndash;&gt;-->
+
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_connect"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:padding="12dp"-->
+            <!--android:background="@drawable/button_border"-->
+            <!--android:text="@string/text_button_connect"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:stateListAnimator="@null"/>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/loginview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical"

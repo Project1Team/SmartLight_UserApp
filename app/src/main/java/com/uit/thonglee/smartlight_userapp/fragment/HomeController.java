@@ -1,19 +1,15 @@
 package com.uit.thonglee.smartlight_userapp.fragment;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -30,7 +26,6 @@ import com.uit.thonglee.smartlight_userapp.R;
 import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.activities.AlertActivity;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
-import com.uit.thonglee.smartlight_userapp.activities.MainActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Fire;
 import com.uit.thonglee.smartlight_userapp.models.Gas;
