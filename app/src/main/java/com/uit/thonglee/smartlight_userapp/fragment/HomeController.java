@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,7 +23,8 @@ import android.widget.TextView;
 
 import com.uit.thonglee.smartlight_userapp.R;
 import com.suke.widget.SwitchButton;
-import com.uit.thonglee.smartlight_userapp.activities.AlertActivity;
+import com.uit.thonglee.smartlight_userapp.activities.AlertFireActivity;
+import com.uit.thonglee.smartlight_userapp.activities.AlertGasActivity;
 import com.uit.thonglee.smartlight_userapp.activities.Call114Activity;
 import com.uit.thonglee.smartlight_userapp.activities.ClearAlarmActivity;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
@@ -128,7 +128,7 @@ public class HomeController extends Fragment {
         if (UserConverter.getGasStatus(mac_address).equals("DETECTED")) {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(Color.RED);
-            notificationManager.notify(0, mBuilder1.build());
+            notificationManager.notify(1, mBuilder1.build());
             if(mMediaPlayer.isPlaying() == false){
                 mMediaPlayer.start();
             }
@@ -402,7 +402,7 @@ public class HomeController extends Fragment {
                 for(Device device : devices){
                     if(device.getType().equals("temperature")){
                         Temperature temperature = (Temperature) device;
-                        if(temperature.getValue().equals(string_temp)) {
+                        if(!temperature.getValue().equals(string_temp)) {
                             string_temp = temperature.getValue();
                             if(Integer.parseInt(string_temp) > 30){
                                 colorTeamperate = String.valueOf(getResources().getColor(R.color.hot_temp_color));
@@ -428,6 +428,7 @@ public class HomeController extends Fragment {
                             else{
                                 statusButtonResetFire = String.valueOf(View.INVISIBLE);
                                 colorFire = String.valueOf(getResources().getColor(R.color.safe_color));
+                                notificationManager.cancel(0);
                                 if(mMediaPlayer.isPlaying()){
                                     mMediaPlayer.stop();
                                     try {
@@ -441,26 +442,28 @@ public class HomeController extends Fragment {
                     }
                     else if(device.getType().equals("gas")){
                         Gas gas = (Gas) device;
-                        if(!gas.getStatus().equals(string_gas))
+                        if(!gas.getStatus().equals(string_gas)){
                             string_gas = gas.getStatus();
-                        if(gas.getStatus().equals("DETECTED")){
-                            statusButtonResetGas = String.valueOf(View.VISIBLE);
-                            colorGas = String.valueOf(Color.RED);
-                            // notification
-                            notificationManager.notify(0, mBuilder1.build());
-                            vibrator.vibrate(1000);
-                            if(!mMediaPlayer.isPlaying())
-                                mMediaPlayer.start();
-                        }
-                        else{
-                            statusButtonResetGas = String.valueOf(View.INVISIBLE);
-                            colorGas = String.valueOf(getResources().getColor(R.color.safe_color));
-                            if(mMediaPlayer.isPlaying()){
-                                mMediaPlayer.stop();
-                                try {
-                                    mMediaPlayer.prepare();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                            if(gas.getStatus().equals("DETECTED")){
+                                statusButtonResetGas = String.valueOf(View.VISIBLE);
+                                colorGas = String.valueOf(Color.RED);
+                                // notification
+                                notificationManager.notify(1, mBuilder1.build());
+                                vibrator.vibrate(1000);
+                                if(!mMediaPlayer.isPlaying())
+                                    mMediaPlayer.start();
+                            }
+                            else{
+                                statusButtonResetGas = String.valueOf(View.INVISIBLE);
+                                colorGas = String.valueOf(getResources().getColor(R.color.safe_color));
+                                notificationManager.cancel(1);
+                                if(mMediaPlayer.isPlaying()){
+                                    mMediaPlayer.stop();
+                                    try {
+                                        mMediaPlayer.prepare();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
                         }
@@ -488,8 +491,8 @@ public class HomeController extends Fragment {
     }
     private void createNotification(){
         // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(this.getContext(), AlertActivity.class);
-        Intent intent1 = new Intent(this.getContext(), AlertActivity.class);
+        Intent intent = new Intent(this.getContext(), AlertFireActivity.class);
+        Intent intent1 = new Intent(this.getContext(), AlertGasActivity.class);
         intent.putExtra(RESET_STATUS, "fire");
         intent1.putExtra(RESET_STATUS, "gas");
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

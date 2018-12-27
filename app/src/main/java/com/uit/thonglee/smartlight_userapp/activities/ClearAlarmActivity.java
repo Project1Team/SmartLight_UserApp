@@ -26,7 +26,7 @@ public class ClearAlarmActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        Intent intent = new Intent(this, AlertActivity.class);
+        Intent intent = new Intent(this, AlertFireActivity.class);
         startActivity(intent);
         HomeController.notificationManager.cancelAll();
         finish();

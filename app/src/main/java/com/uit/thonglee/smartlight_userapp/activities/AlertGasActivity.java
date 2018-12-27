@@ -10,32 +10,25 @@ import android.widget.TextView;
 import com.uit.thonglee.smartlight_userapp.R;
 import com.uit.thonglee.smartlight_userapp.fragment.HomeController;
 
-public class AlertActivity extends AppCompatActivity {
-
+public class AlertGasActivity extends AppCompatActivity {
     ImageButton button_reset;
     TextView textView_alert;
-    String resetAlert;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alert);
+        setContentView(R.layout.activity_alert_gas);
 
-        button_reset = findViewById(R.id.btn_resetButton);
-        textView_alert = findViewById(R.id.txtv_alert);
+        button_reset = findViewById(R.id.btn_resetButton_gas);
+        textView_alert = findViewById(R.id.txtv_alert_gas);
         String type = getIntent().getStringExtra(HomeController.RESET_STATUS);
-        if(type.equals("fire")){
-            textView_alert.setText(getString(R.string.alert_fire));
-            resetAlert = "resetFire";
-        }
-        else if(type.equals("gas")){
+        if(type.equals("gas")){
             textView_alert.setText(getString(R.string.alert_gas));
-            resetAlert = "resetGas";
         }
         button_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginActivity.client.send( resetAlert + "/" + LoginActivity.user.getHomes().get(0).getMacAddr());
+                LoginActivity.client.send("resetGas/" + LoginActivity.user.getHomes().get(0).getMacAddr());
                 finish();
             }
         });
