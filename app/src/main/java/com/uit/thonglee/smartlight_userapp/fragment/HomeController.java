@@ -26,7 +26,8 @@ import com.suke.widget.SwitchButton;
 import com.uit.thonglee.smartlight_userapp.activities.AlertFireActivity;
 import com.uit.thonglee.smartlight_userapp.activities.AlertGasActivity;
 import com.uit.thonglee.smartlight_userapp.activities.Call114Activity;
-import com.uit.thonglee.smartlight_userapp.activities.ClearAlarmActivity;
+import com.uit.thonglee.smartlight_userapp.activities.ClearFireAlarmActivity;
+import com.uit.thonglee.smartlight_userapp.activities.ClearGasAlarmActivity;
 import com.uit.thonglee.smartlight_userapp.activities.LoginActivity;
 import com.uit.thonglee.smartlight_userapp.models.Device;
 import com.uit.thonglee.smartlight_userapp.models.Fire;
@@ -497,12 +498,14 @@ public class HomeController extends Fragment {
         intent1.putExtra(RESET_STATUS, "gas");
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        Intent clearAlarmIntent = new Intent(this.getContext(), ClearAlarmActivity.class);
+        Intent clearFireAlarmIntent = new Intent(this.getContext(), ClearFireAlarmActivity.class);
+        Intent clearGasAlarmIntent = new Intent(this.getContext(), ClearGasAlarmActivity.class);
         Intent call114Intent = new Intent(this.getContext(), Call114Activity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this.getContext(), 0, intent, 0);
         PendingIntent pendingIntent1 = PendingIntent.getActivity(this.getContext(), 0, intent1, 0);
-        PendingIntent clearAlarmPending = PendingIntent.getActivity(this.getContext(), 0, clearAlarmIntent, 0);
+        PendingIntent clearFireAlarmPending = PendingIntent.getActivity(this.getContext(), 0, clearFireAlarmIntent, 0);
+        PendingIntent clearGasAlarmPending = PendingIntent.getActivity(this.getContext(), 0, clearGasAlarmIntent, 0);
         PendingIntent call114Pending = PendingIntent.getActivity(this.getContext(), 0, call114Intent, 0);
 
 
@@ -531,7 +534,7 @@ public class HomeController extends Fragment {
                 .setContentText("Fire detected! Your house is ON FIRE!")
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .addAction(0, "CALL 114", call114Pending)
-                .addAction(0, "DISABLE SOUND", clearAlarmPending)
+                .addAction(0, "DISABLE SOUND", clearFireAlarmPending)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -540,10 +543,10 @@ public class HomeController extends Fragment {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setSmallIcon(R.drawable.icon_gas)
                 .setContentTitle("GAS")
-                .setContentText("Gas detected! Your house is ON GAS!")
+                .setContentText("Detected GAS LEAK inside your house!")
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .addAction(0, "CALL 114", call114Pending)
-                .addAction(0, "DISABLE SOUND", clearAlarmPending)
+                .addAction(0, "DISABLE SOUND", clearGasAlarmPending)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent1)
                 .setAutoCancel(true);

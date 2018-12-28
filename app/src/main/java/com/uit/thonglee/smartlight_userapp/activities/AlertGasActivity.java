@@ -22,9 +22,10 @@ public class AlertGasActivity extends AppCompatActivity {
         button_reset = findViewById(R.id.btn_resetButton_gas);
         textView_alert = findViewById(R.id.txtv_alert_gas);
         String type = getIntent().getStringExtra(HomeController.RESET_STATUS);
-        if(type.equals("gas")){
-            textView_alert.setText(getString(R.string.alert_gas));
-        }
+        textView_alert.setText(getString(R.string.alert_gas));
+//        if(type.equals("gas")){
+//            textView_alert.setText(getString(R.string.alert_gas));
+//        }
         button_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

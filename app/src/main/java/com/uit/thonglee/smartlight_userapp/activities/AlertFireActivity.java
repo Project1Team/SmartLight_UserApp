@@ -21,11 +21,12 @@ public class AlertFireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alert_fire);
 
         button_reset = findViewById(R.id.btn_resetButton);
-        textView_alert = findViewById(R.id.txtv_alert);
+        textView_alert = findViewById(R.id.txtv_alert_fire);
         String type = getIntent().getStringExtra(HomeController.RESET_STATUS);
-        if(type.equals("fire")){
-            textView_alert.setText(getString(R.string.alert_fire));
-        }
+        textView_alert.setText(getString(R.string.alert_fire));
+//        if(type.equals("fire")){
+//            textView_alert.setText(getString(R.string.alert_fire));
+//        }
         button_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

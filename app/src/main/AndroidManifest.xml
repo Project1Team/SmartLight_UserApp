@@ -19,7 +19,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity"></activity>
         <activity android:name=".activities.AlertFireActivity"></activity>
-        <activity android:name=".activities.ClearAlarmActivity"></activity>
+        <activity android:name=".activities.ClearFireAlarmActivity"></activity>
+        <activity android:name=".activities.ClearGasAlarmActivity"></activity>
         <activity android:name=".activities.Call114Activity"></activity>
         <activity android:name=".activities.AlertGasActivity"></activity>
         <activity android:name=".activities.LoginActivity">

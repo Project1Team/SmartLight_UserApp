@@ -11,9 +11,7 @@ import java.io.IOException;
 
 import static com.uit.thonglee.smartlight_userapp.fragment.HomeController.mMediaPlayer;
 
-
-public class ClearAlarmActivity extends AppCompatActivity {
-
+public class ClearGasAlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceStat) {
         super.onCreate(savedInstanceStat);
@@ -26,7 +24,7 @@ public class ClearAlarmActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        Intent intent = new Intent(this, AlertFireActivity.class);
+        Intent intent = new Intent(this, AlertGasActivity.class);
         startActivity(intent);
         HomeController.notificationManager.cancelAll();
         finish();
